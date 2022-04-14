@@ -16,7 +16,7 @@ Spell.Description = [[
 Spell.Category = HpwRewrite.CategoryNames.DestrExp
 Spell.NodeOffset = Vector(-298, 373, 0)
 
-function Spell:OnFire(wand)
+local function baseOnFire(self, blastRadius, blastDamage, maxEntRadius, force)
 	local tr = util.TraceLine({
 		start = self.Owner:GetShootPos(),
 		endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 1200,
@@ -26,42 +26,48 @@ function Spell:OnFire(wand)
 	local ent = tr.Entity
 	local pos = tr.HitPos
 
-	for k, v in pairs(ents.FindInSphere(pos, 50)) do
+	for i, v in ipairs(ents.FindInSphere(pos, 50)) do
 		local phys = v:GetPhysicsObject()
 
-		if v:GetClass() == "prop_physics" then
-			local r = v:GetModelRadius()
-			
-			if r < 100 then 
-				constraint.RemoveAll(v) 
+		if not v.CPPICanPhysgun or v:CPPICanPhysgun(self.Owner) then
+			if v:GetClass() == "prop_physics" then
+				local r = v:GetModelRadius()
 
-				if r > 60 then
-					local ef = EffectData()
-					ef:SetNormal(v:GetUp())
-					ef:SetScale(r)
-					ef:SetOrigin(v:GetPos())
-					util.Effect("ThumperDust", ef)
-				end
+				if r < maxEntRadius then
+					constraint.RemoveAll(v)
 
-				if phys:IsValid() then 
-					phys:EnableMotion(true) 
-					phys:Wake() 
+					if r > 60 then
+						local ef = EffectData()
+						ef:SetNormal(v:GetUp())
+						ef:SetScale(r)
+						ef:SetOrigin(v:GetPos())
+						util.Effect("ThumperDust", ef)
+					end
+
+					if phys:IsValid() then
+						phys:EnableMotion(true)
+						phys:Wake()
+					end
 				end
 			end
 		end
 
 		if phys:IsValid() then
-			phys:ApplyForceCenter((v:GetPos() - pos):GetNormal() * phys:GetMass() * 40)
+			phys:ApplyForceCenter((v:GetPos() - pos):GetNormal() * phys:GetMass() * force)
 		end
 	end
 
 	for i = 1, 2 do sound.Play("phx/kaboom.wav", pos, 82, math.random(90, 110) + i * 8) end
 	sound.Play("ambient/explosions/explode_7.wav", pos, 75, 255)
 
-	util.ScreenShake(pos, 4, 32, 1, 160) 
+	util.ScreenShake(pos, 4, 32, 1, 160)
 
-	util.BlastDamage(self.Owner, self.Owner, pos, 90, 30) 
-	for k, v in pairs(ents.FindInSphere(pos, 90)) do if v.Extinguish then v:Extinguish() end end -- because blastdamage ignites stuff
+	util.BlastDamage(self.Owner, self.Owner, pos, blastRadius, blastDamage)
+	for i, v in ipairs(ents.FindInSphere(pos, blastRadius)) do if v.Extinguish then v:Extinguish() end end -- because blastdamage ignites stuff
+end
+
+function Spell:OnFire()
+	baseOnFire(self, 90, 30, 100, 40)
 end
 
 HpwRewrite:AddSpell("Bombarda", Spell)
@@ -84,52 +90,8 @@ Spell.Description = [[
 Spell.Category = HpwRewrite.CategoryNames.DestrExp
 Spell.NodeOffset = Vector(-186, 253, 0)
 
-function Spell:OnFire(wand)
-	local tr = util.TraceLine({
-		start = self.Owner:GetShootPos(),
-		endpos = self.Owner:GetShootPos() + self.Owner:GetAimVector() * 1800,
-		filter = self.Owner
-	})
-
-	local ent = tr.Entity
-	local pos = tr.HitPos
-
-	for k, v in pairs(ents.FindInSphere(pos, 100)) do
-		local phys = v:GetPhysicsObject()
-
-		if v:GetClass() == "prop_physics" then
-			local r = v:GetModelRadius()
-
-			if r < 200 then 
-				constraint.RemoveAll(v) 
-
-				if r > 60 then
-					local ef = EffectData()
-					ef:SetNormal(v:GetUp())
-					ef:SetScale(r)
-					ef:SetOrigin(v:GetPos())
-					util.Effect("ThumperDust", ef)
-				end
-
-				if phys:IsValid() then 
-					phys:EnableMotion(true) 
-					phys:Wake() 
-				end
-			end
-		end
-
-		if phys:IsValid() then
-			phys:ApplyForceCenter((v:GetPos() - pos):GetNormal() * phys:GetMass() * 120)
-		end
-	end
-
-	for i = 1, 4 do sound.Play("phx/kaboom.wav", pos, 90, math.random(90, 110) + i * 8) end
-	sound.Play("ambient/explosions/explode_7.wav", pos, 80, 255)
-
-	util.ScreenShake(pos, 8, 32, 1, 350) 
-
-	util.BlastDamage(self.Owner, self.Owner, pos, 300, 40)
-	for k, v in pairs(ents.FindInSphere(pos, 300)) do if v.Extinguish then v:Extinguish() end end -- because blastdamage ignites stuff
+function Spell:OnFire()
+	baseOnFire(self, 300, 60, 300, 80)
 end
 
 HpwRewrite:AddSpell("Bombarda Maxima", Spell)
