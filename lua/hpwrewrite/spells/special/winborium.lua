@@ -160,9 +160,9 @@ Spell.Description = [[
 
 function Spell:AfterCollide(spell, data)
 	local ef = true
-	for k, v in pairs(ents.FindInSphere(data.HitPos, 200)) do
-		if not (v:IsNPC() or v:IsPlayer()) then continue end 
-		
+	for k, v in ipairs(ents.FindInSphere(data.HitPos, 200)) do
+		if not (v:IsNPC() or v:IsPlayer()) then continue end
+
 		data.HitEntity = v
 		self.BaseClass.AfterCollide(self, spell, data, ef)
 		ef = false
@@ -190,7 +190,7 @@ Spell.Description = [[
 ]]
 
 function Spell:OnFire()
-	for k, v in pairs(ents.FindInSphere(self.Owner:GetPos(), 500)) do
+	for k, v in ipairs(ents.FindInSphere(self.Owner:GetPos(), 500)) do
 		if v == self.Owner or not (v:IsNPC() or v:IsPlayer()) then continue end
 
 		local data = { }
