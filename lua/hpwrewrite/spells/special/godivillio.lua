@@ -142,7 +142,7 @@ function Spell:OnFire(wand)
 			net.WriteEntity(ent)
 		net.Broadcast()
 
-		timer.Create("hpwrewrite_godivillio_handler" .. ent:EntIndex(), 3, 1, function()
+		timer.Create("hpwrewrite_godivillio_handler" .. ent:EntIndex(), 5, 1, function()
 			if IsValid(ent) then
 				func(ent)
 				sound.Play("hpwrewrite/spells/godivillio.wav", ent:GetPos(), 75)
