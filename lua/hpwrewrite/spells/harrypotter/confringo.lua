@@ -39,14 +39,14 @@ function Spell:AfterCollide(spell, data)
 	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
 
 	local rag = HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), nil, 2, self.Owner)
-	if IsValid(rag) then rag:Ignite(10) else ent:Ignite(10) end
+	if IsValid(rag) then rag:Ignite(1) else ent:Ignite(1) end
 
-	for k, v in pairs(ents.FindInSphere(data.HitPos, 100)) do
+	for k, v in ipairs(ents.FindInSphere(data.HitPos, 100)) do
 		if v == rag or v == ent then continue end
-		v:Ignite(10)
+		v:Ignite(1)
 	end
 
-	util.BlastDamage(spell, IsValid(self.Owner) and self.Owner or spell, data.HitPos, 150, 14) 
+	util.BlastDamage(spell, IsValid(self.Owner) and self.Owner or spell, data.HitPos, 150, 14)
 
 	sound.Play("ambient/fire/mtov_flame2.wav", spell:GetPos(), 100, 90)
 end
