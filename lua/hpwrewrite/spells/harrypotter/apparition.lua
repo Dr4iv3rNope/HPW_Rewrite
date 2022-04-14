@@ -33,6 +33,12 @@ function Spell:SetEnabled(val)
 			end
 		end)
 
+		hook.Add("PlayerDeath", "hpwrewrite_apparition_handler" .. self.Owner:EntIndex(), function(ply)
+			if ply == self.Owner then
+				self:SetEnabled(false)
+			end
+		end)
+
 		self.Owner:SetGravity(0.01) -- for some reason we can't set it to 0
 		self.Owner:SetNoDraw(true)
 		self.Owner:DrawShadow(false)
@@ -93,6 +99,8 @@ function Spell:SetEnabled(val)
 		end)
 	else
 		hook.Remove("GetFallDamage", "hpwrewrite_apparition_handler" .. self.Owner:EntIndex())
+		hook.Remove("PlayerDeath", "hpwrewrite_apparition_handler" .. self.Owner:EntIndex())
+
 		self.Owner:SetGravity(1)
 		self.Owner:SetNoDraw(false)
 		self.Owner:DrawShadow(true)
