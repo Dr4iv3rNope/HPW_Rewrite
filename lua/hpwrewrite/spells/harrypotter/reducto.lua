@@ -118,6 +118,12 @@ function Spell:AfterCollide(spell, data)
 		end
 	end
 
+	if IsValid(ent) and ent.CPPICanTool then
+		if not ent:CPPICanTool(self.Owner) then
+			return
+		end
+	end
+
 	if mat == MAT_CONCRETE or mat == MAT_TILE then
 		models = {
 			"models/props_debris/concrete_chunk04a.mdl",

@@ -32,6 +32,10 @@ function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
 
+	if ent.CPPICanTool then
+		if not ent:CPPICanTool(self.Owner, "color") then return end
+	end
+
 	local color = ColorRand()
 
 	if IsValid(ent) then
