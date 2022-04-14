@@ -29,17 +29,19 @@ function Spell:OnSpellSpawned(wand)
 end
 
 function Spell:OnCollide(spell, data)
-	for k, v in pairs(ents.FindInSphere(data.HitPos, 200)) do
-		local d = DamageInfo()
-		d:SetDamage((200 - data.HitPos:Distance(v:GetPos())) / 2)
-		d:SetAttacker(self.Owner)
+	for k, v in ipairs(ents.FindInSphere(data.HitPos, 200)) do
+		if HpwRewrite:CanAttackEntity(self.Owner, v) then
+			local d = DamageInfo()
+			d:SetDamage((200 - data.HitPos:Distance(v:GetPos())) / 2)
+			d:SetAttacker(self.Owner)
 
-		local wand = HpwRewrite:GetWand(self.Owner)
-		if not wand:IsValid() then wand = self.Owner end
-		
-		d:SetInflictor(wand)
-		d:SetDamageType(DMG_DISSOLVE)
-		v:TakeDamageInfo(d)
+			local wand = HpwRewrite:GetWand(self.Owner)
+			if not wand:IsValid() then wand = self.Owner end
+
+			d:SetInflictor(wand)
+			d:SetDamageType(DMG_DISSOLVE)
+			v:TakeDamageInfo(d)
+		end
 	end
 
 	sound.Play("ambient/energy/weld" .. math.random(1, 2) .. ".wav", data.HitPos, 80, 120)

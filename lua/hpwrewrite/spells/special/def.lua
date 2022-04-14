@@ -26,8 +26,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() then
 			for k, v in pairs(ent:GetWeapons()) do
 				ent:DropWeapon(v)

@@ -30,7 +30,7 @@ end
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) and ent:IsPlayer() then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent:IsPlayer() then
 		ent:ConCommand(table.Random(commands))
 	end
 

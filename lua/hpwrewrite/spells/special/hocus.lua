@@ -36,7 +36,7 @@ end
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) and ent:IsPlayer() then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent:IsPlayer() then
 		local wand = HpwRewrite:GetWand(ent)
 
 		if wand:IsValid() then

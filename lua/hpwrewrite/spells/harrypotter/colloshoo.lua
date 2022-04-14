@@ -15,7 +15,7 @@ local model = Model("models/weapons/w_bugbait.mdl")
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) and (ent:IsPlayer()) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer()) then
 		local tName = "hpwrewrite_colloshoo_handler" .. ent:EntIndex()
 
 		if not timer.Exists(tName) then

@@ -27,8 +27,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ply = data.HitEntity
-	
-	if IsValid(ply) and ply:IsPlayer() then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ply) and ply:IsPlayer() then
 		local wand = HpwRewrite:GetWand(ply)
 
 		if not (wand:IsValid() and wand == ply:GetActiveWeapon() and wand:GetWandCurrentSkin() == "Demonic Wand") then

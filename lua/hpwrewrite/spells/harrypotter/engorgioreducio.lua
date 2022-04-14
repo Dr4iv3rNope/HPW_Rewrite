@@ -94,7 +94,10 @@ Spell.SpriteColor = Color(120, 220, 255)
 Spell.NodeOffset = Vector(-1565, -316, 0)
 
 function Spell:OnFire(wand)
-	ResizeEnt(wand:HPWGetAimEntity(400), true)
+	local ent = wand:HPWGetAimEntity(400)
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
+	ResizeEnt(ent, true)
 end
 
 HpwRewrite:AddSpell("Engorgio", Spell)
@@ -115,7 +118,11 @@ Spell.SpriteColor = Color(220, 120, 255)
 Spell.NodeOffset = Vector(-1684, -466, 0)
 
 function Spell:OnFire(wand)
-	ResizeEnt(wand:HPWGetAimEntity(400), false)
+	local ent = wand:HPWGetAimEntity(400)
+
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
+	ResizeEnt(ent, false)
 end
 
 HpwRewrite:AddSpell("Reducio", Spell)
@@ -138,7 +145,7 @@ Spell.NodeOffset = Vector(-1501, -536, 0)
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) then
 		local bone = ent:LookupBone("ValveBiped.Bip01_Head1")
 
 		if bone then

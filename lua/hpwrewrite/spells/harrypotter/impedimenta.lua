@@ -56,8 +56,8 @@ local undereff = { }
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) and not undereff[ent] then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not undereff[ent] then
 		local name = "hpwrewrite_impedimenta_handler" .. ent:EntIndex()
 
 		if ent:IsPlayer() then

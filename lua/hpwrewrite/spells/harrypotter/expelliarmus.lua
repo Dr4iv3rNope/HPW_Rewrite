@@ -66,7 +66,7 @@ end
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() then
 			local wep = ent:GetActiveWeapon()
 			if wep:IsValid() then ent:DropWeapon(wep) end

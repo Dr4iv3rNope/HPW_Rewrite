@@ -12,7 +12,7 @@ Spell.NodeOffset = Vector(392, -618, 0)
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(250, Vector(-5, -5, -5), Vector(5, 5, 5))
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() or ent:IsNPC() then
 			if ent:IsPlayer() then
 				local ang = AngleRand()
@@ -42,7 +42,7 @@ Spell.NodeOffset = Vector(503, -705, 0)
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(250, Vector(-5, -5, -5), Vector(5, 5, 5))
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local d = DamageInfo()
 		d:SetDamage(25)
 		d:SetAttacker(self.Owner)

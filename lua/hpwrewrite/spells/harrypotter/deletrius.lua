@@ -22,6 +22,7 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
 
 	local d = DamageInfo()
 	d:SetDamage(ent:Health())

@@ -22,6 +22,8 @@ function Spell:OnFire(wand)
 end
 
 function Spell:AfterCollide(spell, data)
+	if not HpwRewrite:CanAttackEntity(self.Owner, data.HitEntity) then return end
+
 	local ent = HpwRewrite:ThrowEntity(data.HitEntity, spell:GetFlyDirection(), nil, 0.7, self.Owner)
 
 	if IsValid(ent) then

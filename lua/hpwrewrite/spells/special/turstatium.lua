@@ -49,8 +49,8 @@ local FriendlyNames = {
 local mdl = "models/combine_turrets/floor_turret.mdl"
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:GetClass() == "prop_physics" and ent:GetModel() == mdl then
 			local pos = ent:GetPos()
 			local ang = ent:GetAngles()

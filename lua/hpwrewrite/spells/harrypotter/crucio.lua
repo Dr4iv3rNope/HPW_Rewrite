@@ -51,6 +51,7 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
 
 	if IsValid(ent) and ent.UnderCrucio then
 		local phys = ent:GetPhysicsObject()

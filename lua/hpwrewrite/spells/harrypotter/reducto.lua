@@ -97,7 +97,7 @@ function Spell:AfterCollide(spell, data)
 
 	local amount = math.random(4, 7)
 
-	if IsValid(data.HitEntity) then
+	if HpwRewrite:CanAttackEntity(self.Owner, data.HitEntity) then
 		HpwRewrite:ThrowEntity(data.HitEntity, spell:GetFlyDirection(), nil, 2, self.Owner)
 
 		if data.HitEntity:IsPlayer() or data.HitEntity:IsNPC() then
@@ -105,7 +105,7 @@ function Spell:AfterCollide(spell, data)
 		end
 	end
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent.PROTEGO_SHIELD then return end
 
 		rad = ent:GetModelRadius()

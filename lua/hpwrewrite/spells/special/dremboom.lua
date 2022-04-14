@@ -55,17 +55,19 @@ function Spell:OnCollide(spell, data)
 		HpwRewrite.BlastDamage(self.Owner, data.HitPos, i, 10)
 	end)
 
-	for k, v in pairs(ents.FindInSphere(data.HitPos, 420)) do
-		local d = DamageInfo()
-		d:SetDamage(v:Health())
-		d:SetAttacker(self.Owner)
+	for k, v in ipairs(ents.FindInSphere(data.HitPos, 420)) do
+		if HpwRewrite:CanAttackEntity(self.Owner, v) then
+			local d = DamageInfo()
+			d:SetDamage(v:Health())
+			d:SetAttacker(self.Owner)
 
-		local wand = HpwRewrite:GetWand(self.Owner)
-		if not wand:IsValid() then wand = self.Owner end
-		
-		d:SetInflictor(wand)
-		d:SetDamageType(DMG_DISSOLVE)
-		v:TakeDamageInfo(d)
+			local wand = HpwRewrite:GetWand(self.Owner)
+			if not wand:IsValid() then wand = self.Owner end
+
+			d:SetInflictor(wand)
+			d:SetDamageType(DMG_DISSOLVE)
+			v:TakeDamageInfo(d)
+		end
 	end
 
 	util.ScreenShake(data.HitPos, 4000, 4000, 3, 10000)

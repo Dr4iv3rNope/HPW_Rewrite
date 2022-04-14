@@ -28,7 +28,7 @@ if SERVER then
 else
 	net.Receive("hpwrewrite_stupefy_handler", function()
 		local old = CurTime()
-		local endtime = old + 40
+		local endtime = old + 10
 
 		hook.Add("RenderScreenspaceEffects", "hpwrewrite_stupefy_handler", function()
 			if CurTime() > endtime or not LocalPlayer():Alive() then hook.Remove("RenderScreenspaceEffects", "hpwrewrite_stupefy_handler") return end
@@ -106,7 +106,7 @@ end
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local phys = ent:GetPhysicsObject()
 		if phys:IsValid() then
 			phys:AddAngleVelocity(-phys:GetAngleVelocity() * 0.9)

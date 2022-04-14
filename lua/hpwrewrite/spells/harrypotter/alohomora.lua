@@ -14,7 +14,7 @@ Spell.AccuracyDecreaseVal = 0
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(100)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local class = ent:GetClass()
 		local valid = true
 

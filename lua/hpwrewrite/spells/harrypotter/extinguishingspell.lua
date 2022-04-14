@@ -11,8 +11,8 @@ Spell.NodeOffset = Vector(-1270, 60, 0)
 
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(300, Vector(-2, -2, -2), Vector(2, 2, 2))
-	if IsValid(ent) then 
-		ent:Extinguish() 
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
+		ent:Extinguish()
 	end
 end
 

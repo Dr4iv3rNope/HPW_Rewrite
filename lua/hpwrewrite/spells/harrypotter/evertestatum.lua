@@ -33,7 +33,7 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local a, b, c, d = HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), 3000, 2)
 		if d then hook.Remove("EntityTakeDamage", d) end
 		if IsValid(a) then sound.Play("weapons/crossbow/bolt_fly4.wav", data.HitPos, 70, 80) end

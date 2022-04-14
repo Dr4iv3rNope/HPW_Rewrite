@@ -16,6 +16,8 @@ function Spell:OnFire(wand)
 	sound.Play("weapons/iceaxe/iceaxe_swing1.wav", wand:GetPos(), 70, 120)
 	local ent = wand:HPWGetAimEntity(560)
 
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	local name = "hpwrewrite_legimmio_handler" .. self.Owner:EntIndex()
 
 	if timer.Exists(name) then return end

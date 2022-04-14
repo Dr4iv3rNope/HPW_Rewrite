@@ -32,8 +32,8 @@ function Spell:OnFire(wand)
 
 	local ent, tr = wand:HPWGetAimEntity(2000, Vector(-5, -5, -2), Vector(5, 5, 2))
 	if not tr.Hit then return end
-	if not IsValid(ent) then return end
-	
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	if ent != self.Owner and not ent:GetPhysicsObject():IsMotionEnabled() then return end
 
 	sound.Play("hpwrewrite/wand/spellcast01.wav", wand:GetPos(), 70)

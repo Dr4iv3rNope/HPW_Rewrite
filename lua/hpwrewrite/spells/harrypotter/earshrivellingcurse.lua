@@ -16,7 +16,7 @@ Spell.AccuracyDecreaseVal = 0.22
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) and ent:IsPlayer() then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent:IsPlayer() then
 		if not timer.Exists("hpwrewrite_earrape" .. ent:EntIndex()) then
 			local filter = RecipientFilter()
 			filter:AddPlayer(ent)

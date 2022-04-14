@@ -38,9 +38,9 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	
+
 	if self.Type == 1 then
-		if IsValid(ent) and IsValid(ent:GetPhysicsObject()) then
+		if HpwRewrite:CanAttackEntity(self.Owner, ent) and IsValid(ent:GetPhysicsObject()) then
 			if not self:CheckFunction(ent) then return end
 
 			if self.Stage == 1 then
@@ -59,7 +59,7 @@ function Spell:AfterCollide(spell, data)
 			self.Stage = self.Stage + 1
 		end
 	elseif self.Type == 2 then
-		if IsValid(ent) and IsValid(ent:GetPhysicsObject()) then
+		if HpwRewrite:CanAttackEntity(self.Owner, ent) and IsValid(ent:GetPhysicsObject()) then
 			if not self:CheckFunction(ent) then return end
 
 			self.Entity1 = ent

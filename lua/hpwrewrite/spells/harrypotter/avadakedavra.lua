@@ -77,7 +77,7 @@ end
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local force = spell:GetFlyDirection() * 10000
 
 		if ent:IsNPC() or ent:IsPlayer() then

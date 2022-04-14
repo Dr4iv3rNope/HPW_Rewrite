@@ -16,7 +16,7 @@ Spell.AccuracyDecreaseVal = 0.25
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(1000, Vector(-10, -10, -4), Vector(10, 10, 4))
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if not ent:IsPlayer() and not ent:IsNPC() then
 			local phys = ent:GetPhysicsObject()
 			if phys:IsValid() then

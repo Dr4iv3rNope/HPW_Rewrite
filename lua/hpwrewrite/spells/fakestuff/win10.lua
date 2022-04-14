@@ -29,7 +29,7 @@ function Spell:OnCollide(spell, data)
 
 	local ent = data.HitEntity
 
-	if IsValid(ent) and ent:IsPlayer() then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent:IsPlayer() then
 		net.Start("hpwrewrite_Win10")
 		net.Send(ent)
 	end

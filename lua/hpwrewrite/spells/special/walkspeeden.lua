@@ -15,7 +15,7 @@ Spell.ShouldReverseSelfCast = true
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(250)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() then
 			local name = "hpwrewrite_walkspeeden_handler" .. ent:EntIndex()
 			if hook.GetTable()["Think"][name] then return end

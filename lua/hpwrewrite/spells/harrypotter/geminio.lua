@@ -13,7 +13,7 @@ Spell.CanSelfCast = false
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(300, Vector(-2, -2, -2), Vector(2, 2, 2))
 
-	if IsValid(ent) and not ent:IsNPC() and not ent:IsPlayer() then 
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not ent:IsNPC() and not ent:IsPlayer() then
 		local phys = ent:GetPhysicsObject()
 		if not phys:IsValid() then return end
 		if ent:GetModelRadius() > 200 then return end

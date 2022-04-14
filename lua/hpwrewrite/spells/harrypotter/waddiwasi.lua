@@ -67,7 +67,7 @@ end
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
 
-	if not IsValid(ent) then return end
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
 	if ent:GetPos():Distance(self.Owner:GetPos()) > 3000 then return end
 	if ent:GetModelRadius() > 230 then return end
 

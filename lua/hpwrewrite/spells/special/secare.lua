@@ -75,8 +75,8 @@ local blocked = HpwRewrite.BlockedNPCs
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) and not blocked[ent:GetClass()] then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) and not blocked[ent:GetClass()] then
 		local owner = self.Owner
 		local wand = HpwRewrite:GetWand(owner)
 

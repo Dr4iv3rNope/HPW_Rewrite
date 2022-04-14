@@ -39,7 +39,7 @@ local validSents = {
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local class = ent:GetClass()
 
 		if validSents[ent:GetClass()] then
@@ -61,6 +61,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	local pos = data.HitPos
 	local ang = data.HitNormal:Angle()
 

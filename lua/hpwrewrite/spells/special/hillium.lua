@@ -21,7 +21,7 @@ Spell.DoSparks = true
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(350)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		ent:SetHealth(ent:GetMaxHealth())
 	end
 

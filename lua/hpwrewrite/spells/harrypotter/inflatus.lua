@@ -30,7 +30,7 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local name = "hpwrewrite_inflatus_handler" .. ent:EntIndex()
 		if timer.Exists(name) then return end
 

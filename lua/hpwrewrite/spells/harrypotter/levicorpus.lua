@@ -45,7 +45,7 @@ function Spell:OnFire(wand)
 
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) then
 		if ent:GetModelRadius() > 280 then return end
 		if ent:GetPhysicsObject():GetMass() > 2000 then return end
 

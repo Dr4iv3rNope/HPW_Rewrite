@@ -1312,5 +1312,22 @@ if SERVER then
 			RunConsoleCommand("hpwrewrite_sv_usesaver", "1")
 		end
 	end)
+
+	function HpwRewrite:CanAttackEntity(attacker, entity)
+		if
+			not IsValid(attacker) or
+			not IsValid(entity)
+		then
+			return false
+		end
+
+		if entity:IsPlayer() then
+			if hook.Run("HPW_CanAttackPlayer", attacker, entity) == false then
+				return false
+			end
+		end
+
+		return hook.Run("HPW_CanAttackEntity", attacker, entity) ~= false
+	end
 end
 

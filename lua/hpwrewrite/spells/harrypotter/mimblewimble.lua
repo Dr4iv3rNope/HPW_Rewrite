@@ -46,7 +46,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	if IsValid(ent) and ent:IsPlayer() then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent:IsPlayer() then
 		local name = "hpwrewrite_mimblewimble_handler" .. ent:EntIndex()
 
 		if not timer.Exists(name) then

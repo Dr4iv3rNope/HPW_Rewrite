@@ -32,7 +32,7 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), 1200, 2, self.Owner)
 
 		if IsValid(ent:GetPhysicsObject()) and not ent:IsPlayer() and not ent:IsNPC() then

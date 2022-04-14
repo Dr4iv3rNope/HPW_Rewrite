@@ -15,7 +15,9 @@ Spell.SpriteColor = Color(50, 100, 255)
 
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(700, Vector(-10, -10, -10), Vector(10, 10, 10))
-	
+
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	local rag, func, name = HpwRewrite:ThrowEntity(ent, self.Owner:GetAimVector() + vector_up, 600, 15, self.Owner)
 
 	if IsValid(rag) then

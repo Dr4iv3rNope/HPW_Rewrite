@@ -99,7 +99,7 @@ end
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(700)
 
-	if IsValid(ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsWorld() and not undereff[ent] then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsWorld() and not undereff[ent] then
 		if self.NotAvailable then
 			sound.Play("weapons/physcannon/energy_bounce" .. math.random(1, 2) .. ".wav", wand:GetPos(), 75, 130)
 			return

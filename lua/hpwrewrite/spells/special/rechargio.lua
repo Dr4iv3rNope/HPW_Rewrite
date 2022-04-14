@@ -21,7 +21,7 @@ function Spell:OnFire(wand)
 	ef:SetScale(0.23)
 	util.Effect("EffectHpwRewriteSparks", ef, true, true)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:GetClass() == "item_healthcharger" then
 			local new = ents.Create("item_healthcharger")
 			new:SetPos(ent:GetPos())

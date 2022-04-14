@@ -13,8 +13,8 @@ Spell.SpriteColor = Color(50, 80, 255)
 
 function Spell:OnFire(wand)
 	local ent, eyeTr = wand:HPWGetAimEntity(1800)
-	
-	if IsValid(ent) then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local radius = ent:GetModelRadius()
 		if radius > 400 then return end
 

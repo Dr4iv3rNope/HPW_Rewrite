@@ -37,8 +37,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		local valid = false
 
 		if ent.IS_DRONE then

@@ -103,8 +103,8 @@ local blocked = HpwRewrite.BlockedNPCs
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
 
-	if IsValid(ent) and not blocked[ent:GetClass()] then
-		if ent:IsNPC() or ent:IsPlayer() then 
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not blocked[ent:GetClass()] then
+		if ent:IsNPC() or ent:IsPlayer() then
 			doSounds(ent)
 
 			for i = 1, ent:GetBoneCount() - 1 do

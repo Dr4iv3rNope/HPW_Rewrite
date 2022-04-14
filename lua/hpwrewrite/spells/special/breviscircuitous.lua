@@ -212,7 +212,7 @@ function Spell:OnFire(wand)
 	local owner = self.Owner
 
 	timer.Simple(hitPos:Distance(wand:GetPos()) * 0.0003, function()
-		if IsValid(ent) then
+		if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 			for k, v in pairs(constraint.GetAllConstrainedEntities(ent)) do
 				if not IsValid(v) then continue end
 

@@ -42,7 +42,7 @@ end
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(300)
 
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) then
 		if not self.Victims[ent] then self.Victims[ent] = 0 end
 
 		self.Victims[ent] = self.Victims[ent] + 1

@@ -32,8 +32,8 @@ local undereff = { }
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) and not undereff[ent] then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) and not undereff[ent] then
 		undereff[ent] = true
 
 		local scales = { }

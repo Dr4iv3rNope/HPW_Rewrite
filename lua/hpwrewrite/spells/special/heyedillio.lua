@@ -32,7 +32,7 @@ end
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(650)
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() then
 			local name = "hpwrewrite_heyedillio_handler" .. ent:EntIndex()
 

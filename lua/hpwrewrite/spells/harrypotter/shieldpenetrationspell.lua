@@ -37,6 +37,8 @@ function Spell:OnFire(wand)
 
 	local ent = wand:HPWGetAimEntity(1600)
 
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	if IsValid(ent) then
 		if ent:IsPlayer() then ent:GodDisable() end
 	end

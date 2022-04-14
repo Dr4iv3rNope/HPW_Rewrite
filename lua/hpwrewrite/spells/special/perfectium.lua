@@ -28,8 +28,8 @@ local undereff = { }
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) and not undereff[ent] then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not undereff[ent] then
 		undereff[ent] = true
 
 		local oldHp = ent:Health()

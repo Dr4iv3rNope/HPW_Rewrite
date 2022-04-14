@@ -30,8 +30,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		ent:TakeDamage(12, self.Owner, HpwRewrite:GetWand(self.Owner))
 	end
 end

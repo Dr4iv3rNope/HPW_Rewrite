@@ -42,8 +42,8 @@ end
 
 function Spell:OnCollide(spell, data)
 	local ent = data.HitEntity
-	
-	if IsValid(ent) and not undereff[ent] then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not undereff[ent] then
 		ent:SetNoDraw(true)
 		undereff[ent] = true
 
@@ -83,8 +83,10 @@ function Spell:OnFire(wand)
 end
 
 function Spell:OnCollide(spell, data)
-	for k, v in pairs(ents.FindInSphere(data.HitPos, 100)) do
-		RemoveOcculto(v)
+	for k, v in ipairs(ents.FindInSphere(data.HitPos, 100)) do
+		if HpwRewrite:CanAttackEntity(self.Owner, v) then
+			RemoveOcculto(v)
+		end
 	end
 end
 

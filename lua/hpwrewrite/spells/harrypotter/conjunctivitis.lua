@@ -33,7 +33,7 @@ end
 
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(500, Vector(-2, -2, -2), Vector(2, 2, 2))
-	if not IsValid(ent) or not ent:IsPlayer() then return end
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) or not ent:IsPlayer() then return end
 
 	net.Start("hpwrewrite_conjunctivitis_handler")
 	net.Send(ent)

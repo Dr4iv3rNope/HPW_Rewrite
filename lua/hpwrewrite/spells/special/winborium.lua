@@ -81,6 +81,8 @@ function Spell:AfterCollide(spell, data, doef)
 	local dir = IsValid(spell) and spell:GetFlyDirection() or vector_origin
 
 	local ent = data.HitEntity
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	local rag, func, tName, hName = HpwRewrite:ThrowEntity(ent, -dir, 3000, 3, self.Owner)
 
 	if IsValid(rag) then

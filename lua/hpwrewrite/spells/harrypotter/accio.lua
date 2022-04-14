@@ -15,8 +15,8 @@ function Spell:OnFire(wand)
 	self.Prop = nil
 
 	local ent = wand:HPWGetAimEntity(2500, Vector(-6, -6, -4), Vector(6, 6, 4))
-	
-	if IsValid(ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsPlayer() and not ent:IsNPC() then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsPlayer() and not ent:IsNPC() then
 		if ent:GetModelRadius() > 280 then return end
 
 		local phys = ent:GetPhysicsObject()

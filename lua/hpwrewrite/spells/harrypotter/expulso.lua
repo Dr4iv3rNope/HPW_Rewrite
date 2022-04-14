@@ -27,7 +27,8 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
-	
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), 4500, 2, self.Owner)
 
 	sound.Play("ambient/levels/citadel/weapon_disintegrate4.wav", data.HitPos, 70, 110)

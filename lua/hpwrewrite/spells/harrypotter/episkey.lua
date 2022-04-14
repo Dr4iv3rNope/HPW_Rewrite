@@ -17,7 +17,7 @@ Spell.AccuracyDecreaseVal = 0.05
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(400)
 
-	if IsValid(ent) and (ent:IsPlayer() or ent:IsNPC()) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and (ent:IsPlayer() or ent:IsNPC()) then
 		ent:SetHealth(math.min(ent:GetMaxHealth(), ent:Health() + 4))
 	end
 

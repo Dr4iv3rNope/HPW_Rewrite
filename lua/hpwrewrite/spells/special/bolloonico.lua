@@ -33,6 +33,8 @@ end
 
 function Spell:AfterCollide(spell, data)
 	local ent = data.HitEntity
+	if not HpwRewrite:CanAttackEntity(self.Owner, ent) then return end
+
 	local rag, func, name = HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), nil, nil, self.Owner)
 
 	if IsValid(rag) then

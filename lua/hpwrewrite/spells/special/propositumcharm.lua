@@ -20,7 +20,7 @@ function Spell:OnFire(wand)
 
 	sound.Play("hpwrewrite/magicchimes03.wav", wand:GetPos(), 73)
 
-	if IsValid(ent) and ent.Base == "gmt_instrument_base" and ent.GetSound and ent.AdvancedKeys then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and ent.Base == "gmt_instrument_base" and ent.GetSound and ent.AdvancedKeys then
 		local name = "hpwrewrite_propositum_handler" .. ent:EntIndex()
 		local nextPlay = 0
 		local nextNote = 1

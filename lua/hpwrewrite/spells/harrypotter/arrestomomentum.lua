@@ -13,8 +13,8 @@ Spell.NodeOffset = Vector(156, 447, 0)
 
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(2500, Vector(-10, -10, -10), Vector(10, 10, 10))
-	
-	if IsValid(ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsPlayer() and not ent:IsNPC() then
+
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and IsValid(ent:GetPhysicsObject()) and not ent:IsPlayer() and not ent:IsNPC() then
 		local phys = ent:GetPhysicsObject()
 
 		if phys:GetVelocity():Length() > 200 then

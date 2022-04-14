@@ -30,8 +30,8 @@ end
 function Spell:OnFire(wand)
 	local ent, tr = wand:HPWGetAimEntity(600)
 
-	if IsValid(ent) and not ent:IsPlayer() and not ent:IsNPC() then
-		if undereff[ent] then 
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) and not ent:IsPlayer() and not ent:IsNPC() then
+		if undereff[ent] then
 			undereff[ent] = nil
 			sound.Play("hpwrewrite/magicchimes02.wav", ent:GetPos(), 70)
 		else

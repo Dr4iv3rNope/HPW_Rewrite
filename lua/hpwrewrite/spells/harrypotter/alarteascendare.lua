@@ -14,7 +14,7 @@ Spell.NodeOffset = Vector(283, 361, 0)
 function Spell:OnFire(wand)
 	local ent = wand:HPWGetAimEntity(1000, Vector(-10, -10, -4), Vector(10, 10, 4))
 
-	if IsValid(ent) then
+	if HpwRewrite:CanAttackEntity(self.Owner, ent) then
 		if ent:IsPlayer() or ent:IsNPC() then
 			ent:SetVelocity(Vector(0, 0, 500))
 		else
