@@ -102,6 +102,7 @@ f(tab, "en", "#wandskins", "Wand skins")
 f(tab, "en", "#spellbinding", "Spell binding")
 f(tab, "en", "#settingshelp", "Settings / Help")
 f(tab, "en", "#adminpanel", "Admin panel")
+f(tab, "en", "#adminonly", "This spell is\nadmin only")
 
 
 -- Other

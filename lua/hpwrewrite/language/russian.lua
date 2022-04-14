@@ -102,6 +102,7 @@ f(tab, "ru", "#wandskins", "Скины")
 f(tab, "ru", "#spellbinding", "Забиндить заклинания")
 f(tab, "ru", "#settingshelp", "Настройки / Помощь")
 f(tab, "ru", "#adminpanel", "Панель администратора")
+f(tab, "ru", "#adminonly", "Это заклинание только\nдля администрации")
 
 
 -- Other

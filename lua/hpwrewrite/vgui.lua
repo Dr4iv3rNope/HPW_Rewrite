@@ -773,6 +773,12 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			end
 		end
 
+		if HpwRewrite:IsSpellInAdminOnly(k) then
+			createLab("")
+			createLab(HpwRewrite.Language:GetWord("#adminonly")):SetColor(HpwRewrite.Colors.Blue)
+			createLab("")
+		end
+
 		if HpwRewrite:IsSpellInBlacklist(k) then
 			createLab("")
 			createLab(HpwRewrite.Language:GetWord("#blacklisted")):SetColor(HpwRewrite.Colors.Blue)
