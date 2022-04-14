@@ -23,49 +23,40 @@ function Spell:OnFire(wand)
 	return true
 end
 
+local MAX_POINTS = 20
 local points = { }
 
 if SERVER then
 	Spell.Points = points
 
-	local wait = 0
-
-	hook.Add("Think", "hpwrewrite_trapcurse_handler", function()
-		if CurTime() < wait then return end
-
-		for _, data in pairs(points) do
+	timer.Create("hpwrewrite_trapcurse_handler", 0.5, 0, function()
+		for _, data in ipairs(points) do
 			local pos = data.Pos
 
-			for k, ent in pairs(ents.FindInSphere(pos, 60)) do
+			for _, ent in ipairs(ents.FindInSphere(pos, 60)) do
 				if ent == data.Owner and data.FreeOwner then continue end
 				if ent.IsHarryPotterSpell or ent.Traps then continue end
-				--if ent:GetClass() == "entity_hpwand_flyingspell" then 
-				local phys = ent:GetPhysicsObject()
 
-				if phys:IsValid() and phys:GetVelocity():Length() > 10 then
-					local ef = EffectData()
-					ef:SetOrigin(pos)
-					util.Effect("Explosion", ef, true, true)
+				local ef = EffectData()
+				ef:SetOrigin(pos)
+				util.Effect("Explosion", ef, true, true)
 
-					local owner = data.Owner
-					local wand = data.Wand
-					
-					if not IsValid(owner) then
-						owner = game.GetWorld()
-						wand = owner
-					end
-					
-					if not IsValid(wand) then wand = owner end 
-					
-					util.BlastDamage(wand, owner, pos, 110, 80)
+				local owner = data.Owner
+				local wand = data.Wand
 
-					points[_] = nil
-					break
+				if not IsValid(owner) then
+					owner = game.GetWorld()
+					wand = owner
 				end
+
+				if not IsValid(wand) then wand = owner end
+
+				util.BlastDamage(wand, owner, pos, 110, 80)
+
+				points[_] = nil
+				break
 			end
 		end
-
-		wait = CurTime() + 0.15
 	end)
 
 	hook.Add("PostCleanupMap", "hpwrewrite_trapcurse_handler", function()
@@ -74,6 +65,10 @@ if SERVER then
 end
 
 function Spell:OnCollide(spell, data)
+	if #points >= MAX_POINTS then
+		table.remove(points, 1)
+	end
+
 	local data2 = { }
 	data2.Owner = self.Owner
 	data2.Wand = HpwRewrite:GetWand(self.Owner)
