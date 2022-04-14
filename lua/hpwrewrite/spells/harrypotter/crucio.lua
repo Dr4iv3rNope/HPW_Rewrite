@@ -1,13 +1,13 @@
 local Spell = { }
 Spell.LearnTime = 900
 Spell.Description = [[
-	One of the three Unforgivable 
-	Curses. It is one of the most 
-	powerful and sinister spells 
-	known to wizardkind. When 
-	cast successfully, the curse 
-	inflicts intense, excruciating 
-	pain on the victim. 
+	One of the three Unforgivable
+	Curses. It is one of the most
+	powerful and sinister spells
+	known to wizardkind. When
+	cast successfully, the curse
+	inflicts intense, excruciating
+	pain on the victim.
 ]]
 Spell.Category = HpwRewrite.CategoryNames.Unforgivable
 Spell.FlyEffect = "hpw_crucio_main"
@@ -75,15 +75,15 @@ function Spell:AfterCollide(spell, data)
 			if not IsValid(rag) then hook.Remove("Think", hName) return end
 
 			if CurTime() > wait then
-				if math.random(1, 4) == 1 then 
-					rag:TakeDamage(math.random(2, 4), self.Owner, HpwRewrite:GetWand(self.Owner)) 
+				if math.random(1, 4) == 1 then
+					rag:TakeDamage(math.random(2, 4), self.Owner, HpwRewrite:GetWand(self.Owner))
 				end
 
 				if ent:IsPlayer() then
 					//local filter = RecipientFilter()
 					//filter:AddPlayer(ent)
 
-					local screams = 
+					local screams =
 					{
 						"vo/npc/male01/no01.wav",
 						"vo/npc/male01/no02.wav",
@@ -91,7 +91,7 @@ function Spell:AfterCollide(spell, data)
 						"vo/npc/male01/pain08.wav",
 						"vo/npc/male01/pain09.wav"
 					}
-					
+
 					local snd = CreateSound(rag, screams[math.random(1, #screams)])
 					snd:Play()
 					//snd:ChangePitch(170, 0)

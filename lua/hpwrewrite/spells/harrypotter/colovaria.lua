@@ -3,7 +3,7 @@ Spell.LearnTime = 30
 Spell.ApplyFireDelay = 0.4
 Spell.ForceSpriteSending = true
 Spell.Description = [[
-	Changes the color of the 
+	Changes the color of the
 	object you're looking at.
 ]]
 

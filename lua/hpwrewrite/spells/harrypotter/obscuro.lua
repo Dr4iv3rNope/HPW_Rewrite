@@ -3,9 +3,9 @@ Spell.LearnTime = 240
 Spell.ApplyFireDelay = 0.45
 
 Spell.Description = [[
-	Used to conjure a blindfold 
-	over the eyes of the victim, 
-	therefore obstructing their 
+	Used to conjure a blindfold
+	over the eyes of the victim,
+	therefore obstructing their
 	view of their surroundings.
 
 	Works only on players.
@@ -29,10 +29,10 @@ else
 		local reverse = false
 
 		hook.Add("RenderScreenspaceEffects", "hpwrewrite_obscuro_handler", function()
-			if CurTime() > endtime then 
+			if CurTime() > endtime then
 				hook.Remove("RenderScreenspaceEffects", "hpwrewrite_obscuro_handler")
 				surface.PlaySound("hpwrewrite/spells/spellimpact.wav")
-				return 
+				return
 			end
 
 			local eff_tab = {
@@ -55,11 +55,11 @@ else
 				coef = math.Approach(coef, 1, dt)
 			end
 
-			if CurTime() > endtime - val * 0.1 and not reverse then 
+			if CurTime() > endtime - val * 0.1 and not reverse then
 				surface.PlaySound("hpwrewrite/magicchimes01.wav")
-				reverse = true 
+				reverse = true
 			end
-			
+
 			DrawColorModify(eff_tab)
 			DrawToyTown(5, ScrH())
 		end)

@@ -5,8 +5,8 @@ Spell.Category = { HpwRewrite.CategoryNames.Special }
 
 Spell.Description = [[
 	Spell that can disrupt
-	wiremod constructions. 
-	Affects anything with 
+	wiremod constructions.
+	Affects anything with
 	electrical damage.
 
 	It's recommended to blacklist
@@ -231,8 +231,8 @@ function Spell:OnFire(wand)
 				doEffect("EffectHpwRewriteLightning", ef, true, true)
 
 				local class = v:GetClass()
-				if wireIndividual[class] then 
-					wireIndividual[class](v) 
+				if wireIndividual[class] then
+					wireIndividual[class](v)
 					snd("ambient/energy/spark" .. random(1, 6) .. ".wav", pos, 72, random(100, 120))
 				end
 
@@ -255,9 +255,9 @@ function Spell:OnFire(wand)
 					if not v.HpwRewriteEffectExists then
 						HpwRewrite.MakeEffect("hpw_misc_energy_main", nil, nil, v)
 
-						timer.Simple(random(12, 24), function() 
-							if IsValid(v) then 
-								v:StopParticles() 
+						timer.Simple(random(12, 24), function()
+							if IsValid(v) then
+								v:StopParticles()
 								v.HpwRewriteEffectExists = nil
 							end
 						end)

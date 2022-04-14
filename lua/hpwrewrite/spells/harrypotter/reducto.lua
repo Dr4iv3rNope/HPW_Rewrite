@@ -1,9 +1,9 @@
 local Spell = { }
 Spell.LearnTime = 720
 Spell.Description = [[
-	Curse that can be used to 
+	Curse that can be used to
 	blast solid objects made from
-	basic materials into pieces. 
+	basic materials into pieces.
 	Cannot blast huge objects.
 ]]
 Spell.Category = HpwRewrite.CategoryNames.DestrExp
@@ -40,7 +40,7 @@ function Spell:Draw(spell)
 
 	render.SetMaterial(mat)
 	render.DrawSprite(spell:GetPos(), 64, 64, self.SpriteColor)
-	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)	
+	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)
 end
 
 function Spell:OnSpellSpawned(wand, spell)
@@ -109,7 +109,7 @@ function Spell:AfterCollide(spell, data)
 		if ent.PROTEGO_SHIELD then return end
 
 		rad = ent:GetModelRadius()
-		if rad > 90 then 
+		if rad > 90 then
 			isBig = true
 		else
 			ent:TakeDamage(ent:Health())
@@ -119,8 +119,8 @@ function Spell:AfterCollide(spell, data)
 	end
 
 	if mat == MAT_CONCRETE or mat == MAT_TILE then
-		models = { 
-			"models/props_debris/concrete_chunk04a.mdl",  
+		models = {
+			"models/props_debris/concrete_chunk04a.mdl",
 			"models/props_debris/concrete_chunk05g.mdl",
 			"models/props_debris/concrete_chunk03a.mdl",
 			"models/props_combine/breenbust_chunk06.mdl",
@@ -143,24 +143,24 @@ function Spell:AfterCollide(spell, data)
 		HpwRewrite.MakeEffect("hpw_reducto_impact_wood", pos, tr.HitNormal:Angle())
 	elseif mat == MAT_METAL then
 		if not isBig then
-			models = { 
-				"models/props_junk/garbage_glassbottle001a_chunk03.mdl", 
-				"models/props_junk/garbage_glassbottle001a_chunk04.mdl" 
+			models = {
+				"models/props_junk/garbage_glassbottle001a_chunk03.mdl",
+				"models/props_junk/garbage_glassbottle001a_chunk04.mdl"
 			}
 		end
 
 		amount = math.floor(amount * 1.5)
 
-		callback = function(debris, phys) 
-			phys:SetMaterial("metal") 
+		callback = function(debris, phys)
+			phys:SetMaterial("metal")
 			debris:SetMaterial("models/props_c17/metalladder001")
-			debris:SetColor(HpwRewrite.Colors.DarkGrey6) 
+			debris:SetColor(HpwRewrite.Colors.DarkGrey6)
 		end
 
 		for i = 1, 3 do sound.Play("physics/metal/metal_box_break" .. math.random(1, 2) .. ".wav", pos, 72) end
 		HpwRewrite.MakeEffect("hpw_reducto_impact_metal", pos, tr.HitNormal:Angle())
 	elseif mat == MAT_GLASS then
-		models = { 
+		models = {
 			"models/gibs/glass_shard.mdl",
 			"models/gibs/glass_shard01.mdl",
 			"models/gibs/glass_shard02.mdl",
@@ -174,7 +174,7 @@ function Spell:AfterCollide(spell, data)
 
 		for i = 1, 4 do sound.Play("physics/glass/glass_sheet_break" .. math.random(1, 3) .. ".wav", pos, 68) end
 		HpwRewrite.MakeEffect("hpw_reducto_impact_glass", pos, tr.HitNormal:Angle())
-	else //if mat == MAT_GRASS or mat == MAT_SAND then
+	else --if mat == MAT_GRASS or mat == MAT_SAND then
 		HpwRewrite.MakeEffect("hpw_reducto_impact_stone", pos, tr.HitNormal:Angle())
 	end
 

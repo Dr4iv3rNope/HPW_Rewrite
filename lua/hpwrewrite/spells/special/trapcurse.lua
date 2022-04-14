@@ -2,7 +2,7 @@ local Spell = { }
 Spell.LearnTime = 360
 Spell.Description = [[
 	Places invisible mine at
-	the point you're 
+	the point you're
 	looking at.
 ]]
 Spell.FlyEffect = "hpw_mine_fly"
@@ -68,7 +68,7 @@ if SERVER then
 		wait = CurTime() + 0.15
 	end)
 
-	hook.Add("PostCleanupMap", "hpwrewrite_trapcurse_handler", function() 
+	hook.Add("PostCleanupMap", "hpwrewrite_trapcurse_handler", function()
 		table.Empty(points)
 	end)
 end
@@ -135,7 +135,7 @@ local Spell = { }
 Spell.Base = "Trap Curse"
 Spell.Description = [[
 	Places invisible mine at
-	the point you're 
+	the point you're
 	looking at.
 	Will not react to the caster.
 ]]
@@ -160,7 +160,7 @@ local Spell = { }
 Spell.Base = "Disarm Curse"
 Spell.Description = [[
 	Destroys all nearby placed
-	Trap Curse mines. Makes Trap 
+	Trap Curse mines. Makes Trap
 	Curse Duo mines less effective.
 ]]
 

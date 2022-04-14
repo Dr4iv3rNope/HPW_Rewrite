@@ -5,8 +5,8 @@ Spell.SpriteColor = Color(0, 255, 0)
 Spell.ForceAnim = { ACT_VM_PRIMARYATTACK_3 }
 Spell.FlyEffect = "hpw_tarantal_main"
 Spell.Description = [[
-	Used to force another 
-	person's legs to begin 
+	Used to force another
+	person's legs to begin
 	dancing uncontrollably.
 ]]
 

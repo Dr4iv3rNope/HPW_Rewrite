@@ -15,7 +15,7 @@ HpwRewrite.NumOfSkins = HpwRewrite.NumOfSkins or 0
 
 HpwRewrite.DefaultSkin = HpwRewrite.DefaultSkin or "Wand"
 
-if CLIENT then 
+if CLIENT then
 	HpwRewrite.Categories = HpwRewrite.Categories or { }
 	HpwRewrite.PlyNumOfSpells = HpwRewrite.PlyNumOfSpells or 0
 
@@ -38,7 +38,7 @@ if CLIENT then
 			net.SendToServer()
 		else
 			surface.PlaySound("hpwrewrite/select.wav")
-			
+
 			net.Start("hpwrewrite_Chng")
 				net.WriteString(name)
 			net.SendToServer()
@@ -55,7 +55,7 @@ if CLIENT then
 	function HpwRewrite:DrawSpellRect(spell, key, x, y, w, h)
 		local mmorpg = HpwRewrite.CVars.MmorpgStyle:GetBool()
 		local wand = self:GetWand(LocalPlayer())
-	
+
 		if mmorpg then
 			local color = white
 			if spell and not self:CanUseSpell(LocalPlayer(), spell) then color = Color(255, 110, 110) end
@@ -96,7 +96,7 @@ if CLIENT then
 
 				local x = x + 1
 				local y = y + 1
-				
+
 				local w = w - 2
 				local h = h - 2
 
@@ -131,7 +131,7 @@ if CLIENT then
 			if string.len(spell) > 6 then
 				font = "HPW_fontSpells2"
 			end
-			
+
 			local x = x + w * 0.5
 
 			local function DrawRestricted(str)
@@ -147,8 +147,8 @@ if CLIENT then
 				end
 			end
 
-			for k, str in pairs(string.Explode(" ", spell)) do 
-				DrawRestricted(str) 
+			for k, str in pairs(string.Explode(" ", spell)) do
+				DrawRestricted(str)
 			end
 		end
 
@@ -156,13 +156,13 @@ if CLIENT then
 			--[[if mmorpg then
 				local x = x + w * 0.95
 				local y = y + h * 0.76
-			
+
 				draw.SimpleText(self.BM.Keys[key], "HPW_font1", x + 1, y + 1, black, TEXT_ALIGN_RIGHT)
 				draw.SimpleText(self.BM.Keys[key], "HPW_font1", x, y, white, TEXT_ALIGN_RIGHT)
 			else]]
 				local x = x + w * 0.5
 				local y = y + h * 0.7
-			
+
 				draw.SimpleText(self.BM.Keys[key], "HPW_font1", x + 1, y + 1, black, TEXT_ALIGN_CENTER)
 				draw.SimpleText(self.BM.Keys[key], "HPW_font1", x, y, white, TEXT_ALIGN_CENTER)
 			--end
@@ -170,8 +170,8 @@ if CLIENT then
 	end
 end
 
-function HpwRewrite:GetSpells() 
-	return self.Spells 
+function HpwRewrite:GetSpells()
+	return self.Spells
 end
 
 function HpwRewrite:GetSpell(name)
@@ -188,13 +188,13 @@ local badMaterial = Material("debug/debugempty")
 function HpwRewrite:GetSpellIcon(name)
 	local spell = HpwRewrite:GetSpell(name)
 	if not spell or not spell.IconMat then return badMaterial end
-	
+
 	return spell.IconMat
 end
 
 --[[
-	You can find creating spell guide 
-	here: 
+	You can find creating spell guide
+	here:
 ]]
 
 local addedSomeSpells = false
@@ -218,10 +218,10 @@ local defaultValues = {
 	OnSpellSpawned = function() end,
 	Draw = function() end,
 	SpellThink = function() end,
-	OnCollide = function() end,	
+	OnCollide = function() end,
 	AfterCollide = function() end,
 	OnRemove = function() end,
-	Think = function() end,	
+	Think = function() end,
 	OnPostLearn = function() end,
 	OnStopLearn = function() end,
 	PostDrawViewModel = function() end,
@@ -264,7 +264,7 @@ local defaultValues = {
 
 		render.SetMaterial(glowMat)
 		render.DrawSprite(spell:GetPos(), size, size, color)
-		render.DrawSprite(spell:GetPos(), size * 2, size * 0.75, color)	
+		render.DrawSprite(spell:GetPos(), size * 2, size * 0.75, color)
 	end,
 
 	NodeDraw = function() end,
@@ -304,8 +304,8 @@ function HpwRewrite:AddSpell(name, tab)
 
 	if tab.Base then
 		if queue[name] then
-			setmetatable(tab, { 
-				__index = function(curTab, key) 
+			setmetatable(tab, {
+				__index = function(curTab, key)
 					local spell = self:GetSpell(curTab.Base)
 
 					if spell then
@@ -374,25 +374,25 @@ function HpwRewrite:AddSpell(name, tab)
 			local old = tab.OnPostLearn
 			function tab:OnPostLearn(ply)
 				old(self, ply)
-				
+
 				net.Start("hpwrewrite_Congrats")
 				net.Send(ply)
 			end
 		end
 	end
 
-	if CLIENT then 
+	if CLIENT then
 		if type(tab.Category) == "table" then
 			for k, v in pairs(tab.Category) do self:AddCategory(v) end
 		else
-			self:AddCategory(tab.Category) 
+			self:AddCategory(tab.Category)
 		end
 	end
 
 	-- Creating spell book / wand box
 	if tab.CreateEntity then
 		local ENT = { }
-		
+
 		ENT.Type = "anim"
 		ENT.Base = "entity_hpwand_bookbase"
 		ENT.PrintName = name
@@ -401,7 +401,7 @@ function HpwRewrite:AddSpell(name, tab)
 		ENT.Spawnable =  tab.ShowInSpawnmenu
 
 		ENT.Model = tab.Models and Model(table.Random(tab.Models)) or (tab.IsSkin and Model("models/hpwrewrite/wandbox/boxclosed.mdl") or Model("models/hpwrewrite/books/book2.mdl"))
-		
+
 		if CLIENT and tab.ShouldRenderBookIcon then
 			-- Materials are not available while lua loads
 			timer.Simple(1, function() ENT.CustomIcon = self:GetSpellIcon(name) end)
@@ -409,8 +409,8 @@ function HpwRewrite:AddSpell(name, tab)
 
 		function ENT:GiveSpells(activator, caller)
 			local complete, reason = HpwRewrite:PlayerGiveLearnableSpell(activator, self.PrintName)
-			if not complete then 
-				HpwRewrite:DoNotify(activator, reason or "Unknown error!") 
+			if not complete then
+				HpwRewrite:DoNotify(activator, reason or "Unknown error!")
 				return false
 			end
 
@@ -459,7 +459,7 @@ function HpwRewrite:AddSpell(name, tab)
 			if tab.IsSkin then
 				self.NumOfSkins = self.NumOfSkins + 1
 			else
-				self.NumOfSpells = self.NumOfSpells + 1 
+				self.NumOfSpells = self.NumOfSpells + 1
 			end
 		end
 
@@ -545,12 +545,12 @@ function HpwRewrite:SkillLevel(ply)
 	return self:PlayerNumSpells(ply) / self:GetNumOfSpells()
 end
 
-function HpwRewrite:IsSpellInAdminOnly(name) 
+function HpwRewrite:IsSpellInAdminOnly(name)
 	if self.AdminOnly[name] then return true end
 	return false
 end
 
-function HpwRewrite:IsSpellInBlacklist(name) 
+function HpwRewrite:IsSpellInBlacklist(name)
 	if self.Blacklist[name] then return true end
 	return false
 end
@@ -571,12 +571,13 @@ end
 function HpwRewrite:CanLearn(ply, name)
 	local spell = HpwRewrite:GetPlayerLearnableSpell(ply, name)
 	if not spell then return false end
-	
+
 	return CheckLearned(ply, spell)
 end
 
 -- General function to check if some player can use some spell
 function HpwRewrite:CanUseSpell(ply, name)
+	if self:IsSpellInAdminOnly(name) and not ply:IsAdmin() then return false end
 	if self:IsSpellInBlacklist(name) then return false end
 
 	local spell = self:GetPlayerSpell(ply, name)
@@ -589,7 +590,7 @@ function HpwRewrite:CanUseSpell(ply, name)
 		local skinname = wand:GetWandCurrentSkin()
 		local skin = self:GetPlayerSkin(ply, skinname)
 		if not skin then return false end
-		
+
 		if skin.SpellFilter and table.HasValue(skin.SpellFilter, name) then return false end
 		if skin.OnlyTheseSpells and not table.HasValue(skin.OnlyTheseSpells, name) then return false end
 		if spell.OnlyWithSkin and not table.HasValue(spell.OnlyWithSkin, skinname) then return false end
@@ -597,13 +598,13 @@ function HpwRewrite:CanUseSpell(ply, name)
 
 	-- Why not use CheckLearned?
 	if spell.OnlyIfLearned then
-		for k, v in pairs(spell.OnlyIfLearned) do 
-			if not self:PlayerHasSpell(ply, v) then 
-				return false 
-			end 
+		for k, v in pairs(spell.OnlyIfLearned) do
+			if not self:PlayerHasSpell(ply, v) then
+				return false
+			end
 		end
 	end
-	
+
 	return true
 end
 
@@ -642,18 +643,18 @@ if SERVER then
 
 	local function WriteToAdminOnly(name, val)
 		HpwRewrite.AdminOnly[name] = val
-		
+
 		net.Start("hpwrewrite_clAdm")
 			net.WriteString(name)
 			net.WriteBit(val)
 		net.Broadcast()
 	end
-	
+
 	function HpwRewrite:CleanEverything()
 		table.Empty(self.AdminOnly)
 		table.Empty(self.Blacklist)
 
-		for k, v in pairs(player.GetAll()) do 
+		for k, v in pairs(player.GetAll()) do
 			self:EmptyTables(v)
 			table.Empty(self.SpellCache)
 
@@ -697,8 +698,8 @@ if SERVER then
 
 		data.DefaultSkin = name
 
-		if table.HasValue(data.Blacklist, name) then 
-			WriteToBlacklist(name, false) 
+		if table.HasValue(data.Blacklist, name) then
+			WriteToBlacklist(name, false)
 			table.RemoveByValue(data.Blacklist, name)
 		end
 
@@ -790,8 +791,8 @@ if SERVER then
 		local data, filename = self.DM:LoadDataFile(ply)
 		if not data then return end
 
-		if not table.HasValue(data.Spells, name) then 
-			table.insert(data.Spells, name) 
+		if not table.HasValue(data.Spells, name) then
+			table.insert(data.Spells, name)
 			file.Write(filename, util.TableToJSON(data))
 		end
 
@@ -814,8 +815,8 @@ if SERVER then
 		local data, filename = self.DM:LoadDataFile(ply)
 		if not data then return end
 
-		if not table.HasValue(data.LearnableSpells, name) then 
-			table.insert(data.LearnableSpells, name) 
+		if not table.HasValue(data.LearnableSpells, name) then
+			table.insert(data.LearnableSpells, name)
 			file.Write(filename, util.TableToJSON(data))
 		end
 
@@ -864,8 +865,8 @@ if SERVER then
 			return HpwRewrite:SaveAndGiveSpell(ply, name)
 		end
 
-		if self:PlayerHasLearnableSpell(ply, name) then 
-			return false, Format(HpwRewrite.Language:GetWord("#alreadyhavebook"), name) 
+		if self:PlayerHasLearnableSpell(ply, name) then
+			return false, Format(HpwRewrite.Language:GetWord("#alreadyhavebook"), name)
 		end
 
 		self:LogDebug("Giving learnable " .. name .. " to " .. ply:Name())
@@ -912,8 +913,8 @@ if SERVER then
 			copy = self:LoadFromCache(ply, name)
 			shouldCopy = false
 
-			if not copy then 
-				copy = self:GetSpell(name) 
+			if not copy then
+				copy = self:GetSpell(name)
 				shouldCopy = true
 			end
 
@@ -927,7 +928,7 @@ if SERVER then
 		end
 
 		-- TODO: replace this check somehow
-		if not copy:OnSpellGiven(ply) then 
+		if not copy:OnSpellGiven(ply) then
 			if not forceadd then return end
 		end
 
@@ -1014,9 +1015,9 @@ if SERVER then
 		local shouldCopy = false
 		local spell = self:GetPlayerLearnableSpell(ply, name)
 
-		if not spell then 
-			spell = self:GetSpell(name) 
-			shouldCopy = true 
+		if not spell then
+			spell = self:GetSpell(name)
+			shouldCopy = true
 		end
 
 		if not spell then return end
@@ -1141,7 +1142,7 @@ if SERVER then
 		net.Start("hpwrewrite_SpCl")
 		net.Send(ply)
 
-		for k, v in pairs(self:GetLearnedSpells(ply)) do 
+		for k, v in pairs(self:GetLearnedSpells(ply)) do
 			self:PlayerRemoveSpell(ply, k, true) -- Third param to skip useless net
 		end
 
@@ -1190,13 +1191,13 @@ if SERVER then
 
 			local data, filename = self.DM:LoadDataFile(ply)
 			for k, v in pairs(spells) do
-				if not (data and v.AbsoluteSecret and not table.HasValue(data.Spells, k)) then 
-					self:PlayerGiveSpell(ply, k) 
+				if not (data and v.AbsoluteSecret and not table.HasValue(data.Spells, k)) then
+					self:PlayerGiveSpell(ply, k)
 				end
 			end
 		else
 			self:LogDebug("Loading spells for " .. ply:Name())
-			
+
 			-- Giving spells from file
 			local data, filename = self.DM:LoadDataFile(ply)
 			if data then
@@ -1224,7 +1225,7 @@ if SERVER then
 
 	function HpwRewrite:ReloadSpells(ply)
 		self:EmptyTables(ply) -- Removing existing data
-		self:LoadSpells(ply) 
+		self:LoadSpells(ply)
 
 		self:LogDebug(ply:Name() .. "'s spells have been reloaded!")
 	end
@@ -1239,8 +1240,8 @@ if SERVER then
 
 	-- Hooks, handlers
 	hook.Add("PlayerInitialSpawn", "hpwrewrite_updatespells", function(ply)
-		if not ply.HpwRewrite then 
-			ply.HpwRewrite = { } 
+		if not ply.HpwRewrite then
+			ply.HpwRewrite = { }
 			HpwRewrite:LogDebug(ply:Name() .. " HpwRewrite namespace has been initialized in hpwrewrite_updatespells hook")
 		end
 
@@ -1284,8 +1285,8 @@ if SERVER then
 		local changed = false
 
 		for k, v in pairs(player.GetAll()) do
-			if not v.HpwRewrite then 
-				v.HpwRewrite = { } 
+			if not v.HpwRewrite then
+				v.HpwRewrite = { }
 				HpwRewrite:LogDebug("WARNING !!! " .. v:Name() .. " HpwRewrite namespace has been initialized in HpwRewrite_CheckTabs timer")
 
 				changed = true

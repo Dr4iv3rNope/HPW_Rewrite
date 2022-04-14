@@ -16,8 +16,8 @@ Spell.NodeOffset = Vector(669, 135, 0)
 
 local mat = Material("cable/redlaser")
 local mat2 = Material("cable/xbeam")
-Spell.FightingEffect = function(nPoints, points) 
-	render.SetMaterial(mat) 
+Spell.FightingEffect = function(nPoints, points)
+	render.SetMaterial(mat)
 	render.StartBeam(nPoints)
 		for k, v in pairs(points) do
 			render.AddBeam(v, (k / nPoints) * 32, math.Rand(0, 1), color_white)

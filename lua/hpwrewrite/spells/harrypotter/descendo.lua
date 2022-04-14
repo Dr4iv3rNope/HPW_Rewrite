@@ -2,7 +2,7 @@ local Spell = { }
 Spell.LearnTime = 90
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Forces target to move 
+	Forces target to move
 	downwards.
 ]]
 
@@ -33,7 +33,7 @@ function Spell:OnFire(wand)
 			filter = ent
 		})
 
-		if tr.Hit then 
+		if tr.Hit then
 			sound.Play("hpwrewrite/spells/spellimpact.wav", ent:GetPos(), 70, 120)
 
 			phys:Sleep()

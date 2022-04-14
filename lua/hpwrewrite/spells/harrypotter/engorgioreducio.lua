@@ -2,7 +2,7 @@ local data = { }
 
 local function ResizeEnt(ent, bigger)
 	if not IsValid(ent) then return end
-	
+
 	local scale = 1
 	if bigger then scale = 1.1 else scale = 0.9 end
 
@@ -52,7 +52,7 @@ local function ResizeEnt(ent, bigger)
 		if data[ent] < 0.5 then scale = 1.1 end
 
 		data[ent] = data[ent] * scale
-		
+
 		if data[ent] >= 0.75 and data[ent] <= 0.75 then -- Saves actual size
 			ent:SetViewOffset(Vector(0, 0, 64))
 			ent:SetViewOffsetDucked(Vector(0, 0, 28))
@@ -86,7 +86,7 @@ local Spell = { }
 Spell.LearnTime = 240
 Spell.ApplyFireDelay = 0.4
 Spell.Description = [[
-	Increases the size of your 
+	Increases the size of your
 	target.
 ]]
 

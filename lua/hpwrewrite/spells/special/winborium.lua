@@ -22,7 +22,7 @@ else
 
 	local function spawn(mdl, pos, dir)
 		util.PrecacheModel(mdl)
-			
+
 		local myPos = pos + VectorRand() * 25
 		local prop = ents.CreateClientProp()
 		prop:SetModel(mdl)
@@ -45,7 +45,7 @@ else
 			prop:SetPos(prop:GetPos() + (dir and prop:GetForward() or prop:GetUp()) * FrameTime() * 350)
 			prop:SetAngles(prop:GetAngles() + dir * FrameTime() * 7)
 			prop:SetColor(Color(255, 0, 0, alpha))
-				
+
 			alpha = alpha - FrameTime() * decay
 
 			if alpha <= 0 then prop:Remove() end

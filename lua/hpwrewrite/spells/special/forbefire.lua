@@ -23,7 +23,7 @@ Spell.OnlyIfLearned = { "Dragoner" }
 Spell.DoSparks = true
 
 function Spell:Draw(spell)
-	//self:DrawGlow(spell, nil, 128)
+	--self:DrawGlow(spell, nil, 128)
 end
 
 function Spell:OnSpellSpawned(wand, spell)
@@ -41,7 +41,7 @@ function Spell:OnCollide(spell, data)
 	sound.Play("ambient/explosions/explode_9.wav", data.HitPos, 100, math.random(90, 110))
 
 	util.ScreenShake(data.HitPos, 1000, 1000, 1, 1000)
-	//util.Decal("HpwForbefire", data.HitPos - data.HitNormal, data.HitPos + data.HitNormal)
+	--util.Decal("HpwForbefire", data.HitPos - data.HitNormal, data.HitPos + data.HitNormal)
 end
 
 HpwRewrite:AddSpell("Forbefire", Spell)

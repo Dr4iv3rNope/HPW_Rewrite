@@ -1,7 +1,7 @@
 local Spell = { }
 Spell.LearnTime = 420
 Spell.Description = [[
-	Forces your target to drop 
+	Forces your target to drop
 	it's weapons.
 ]]
 Spell.FlyEffect = "hpw_expelliarmus_main"

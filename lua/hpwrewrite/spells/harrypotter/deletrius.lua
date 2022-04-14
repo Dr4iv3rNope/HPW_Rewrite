@@ -29,7 +29,7 @@ function Spell:AfterCollide(spell, data)
 
 	local wand = HpwRewrite:GetWand(self.Owner)
 	if not wand:IsValid() then wand = self.Owner end
-	
+
 	d:SetInflictor(wand)
 	//d:SetDamage(ent:Health())
 	d:SetDamageType(DMG_DISSOLVE)

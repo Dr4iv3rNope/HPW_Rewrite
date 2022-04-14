@@ -30,9 +30,9 @@ Spell.AccuracyDecreaseVal = 1
 Spell.ShouldSay = false
 
 function Spell:OnFire(wand)
-	if HpwRewrite:SkillLevel(self.Owner) < 0.7 then 
+	if HpwRewrite:SkillLevel(self.Owner) < 0.7 then
 		self.Owner:Kill()
-		return 
+		return
 	end
 
 	local ent = wand:HPWGetAimEntity(1600)

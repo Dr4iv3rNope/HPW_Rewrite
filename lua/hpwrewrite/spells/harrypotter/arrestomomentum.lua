@@ -2,7 +2,7 @@ local Spell = { }
 Spell.LearnTime = 30
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Stabilizes the object 
+	Stabilizes the object
 	in the air.
 ]]
 
@@ -27,9 +27,9 @@ function Spell:OnFire(wand)
 		local dieTime = CurTime() + 3
 		local name = "hpwrewrite_arrestomomentum_handler" .. ent:EntIndex()
 		hook.Add("Think", name, function()
-			if not ent:IsValid() or not phys:IsValid() or CurTime() > dieTime then 
-				hook.Remove("Think", name) 
-				return 
+			if not ent:IsValid() or not phys:IsValid() or CurTime() > dieTime then
+				hook.Remove("Think", name)
+				return
 			end
 
 			if inverse then

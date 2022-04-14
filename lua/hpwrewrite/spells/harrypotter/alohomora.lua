@@ -33,7 +33,7 @@ function Spell:OnFire(wand)
 			if ent.HPWColloportusOldFunc and isfunction(ent.HPWColloportusOldFunc) then
 				ent.Process = ent.HPWColloportusOldFunc
 			end
-			
+
 			if ent.Process then ent:Process(true) end
 		elseif class == "gmod_wire_keypad" and ent.IsWire and Wire_TriggerOutput then -- Wire keypad
 			-- Ive not found any function similar to Process for wire keypad

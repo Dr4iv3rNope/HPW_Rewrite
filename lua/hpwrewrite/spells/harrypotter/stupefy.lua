@@ -1,11 +1,11 @@
 local Spell = { }
 Spell.LearnTime = 300
 Spell.Description = [[
-	The Stunning Spell, also 
-	known as a Stunner or 
-	Stupefying Charm is a charm 
-	that renders a victim 
-	unconscious and halts 
+	The Stunning Spell, also
+	known as a Stunner or
+	Stupefying Charm is a charm
+	that renders a victim
+	unconscious and halts
 	moving objects.
 ]]
 Spell.Category = HpwRewrite.CategoryNames.Fight
@@ -33,20 +33,20 @@ else
 		hook.Add("RenderScreenspaceEffects", "hpwrewrite_stupefy_handler", function()
 			if CurTime() > endtime or not LocalPlayer():Alive() then hook.Remove("RenderScreenspaceEffects", "hpwrewrite_stupefy_handler") return end
 
-			local pow = 1 - (CurTime() - old) / (endtime - old) 
+			local pow = 1 - (CurTime() - old) / (endtime - old)
 			DrawMotionBlur(0.02, pow, 0.01)
 		end)
 
 		hook.Add("Think", "hpwrewrite_stupefy_handler", function()
 			if CurTime() > endtime or not LocalPlayer():Alive() then
 				local ang = LocalPlayer():EyeAngles()
-				ang.r = 0 
+				ang.r = 0
 				LocalPlayer():SetEyeAngles(ang)
-				hook.Remove("Think", "hpwrewrite_stupefy_handler") 
-				return 
+				hook.Remove("Think", "hpwrewrite_stupefy_handler")
+				return
 			end
 
-			local pow = 1 - (CurTime() - old) / (endtime - old) 
+			local pow = 1 - (CurTime() - old) / (endtime - old)
 			local eyes = LocalPlayer():EyeAngles()
 
 			LocalPlayer():SetEyeAngles(eyes + Angle(math.cos(CurTime() * 2) * 0.2, math.sin(CurTime()) * 0.4, math.sin(CurTime()) * 0.06) * pow)
@@ -56,8 +56,8 @@ end
 
 local mat = Material("cable/physbeam")
 local mat2 = Material("cable/xbeam")
-Spell.FightingEffect = function(nPoints, points) 
-	render.SetMaterial(mat) 
+Spell.FightingEffect = function(nPoints, points)
+	render.SetMaterial(mat)
 	render.StartBeam(nPoints)
 		for k, v in pairs(points) do
 			render.AddBeam(v, (k / nPoints) * 32, math.Rand(0, 1), color_white)

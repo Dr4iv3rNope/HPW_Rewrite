@@ -43,11 +43,11 @@ else
 
 			local name = "hpwrewrite_godivillio_handlermdl" .. mdl:EntIndex()
 			hook.Add("Think", name, function()
-				if not IsValid(mdl) or not IsValid(ent) then 
-					SafeRemoveEntity(mdl) 
-					hook.Remove("Think", name) 
+				if not IsValid(mdl) or not IsValid(ent) then
+					SafeRemoveEntity(mdl)
+					hook.Remove("Think", name)
 
-					return 
+					return
 				end
 
 				if ent:IsPlayer() then

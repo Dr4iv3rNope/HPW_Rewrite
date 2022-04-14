@@ -19,7 +19,7 @@ Spell.NodeOffset = Vector(1470, -1038, 0)
 Spell.Stage = 1
 Spell.Type = 1
 
-Spell.CheckFunction = function(self, ent) 
+Spell.CheckFunction = function(self, ent)
 	if not self.AllowCreatures and (ent:IsPlayer() or ent:IsNPC()) then return false end
 	return true
 end
@@ -33,7 +33,7 @@ function Spell:OnFire(wand)
 end
 
 function Spell:ToolCallback()
-	constraint.Weld(self.Entity1, self.Entity2, 0, 0, 0, true, false) 
+	constraint.Weld(self.Entity1, self.Entity2, 0, 0, 0, true, false)
 end
 
 function Spell:AfterCollide(spell, data)

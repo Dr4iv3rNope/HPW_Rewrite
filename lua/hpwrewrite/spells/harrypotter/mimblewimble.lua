@@ -2,8 +2,8 @@ local Spell = { }
 Spell.LearnTime = 120
 Spell.Category = HpwRewrite.CategoryNames.Fight
 Spell.Description = [[
-	Prevents your opponent from 
-	casting spells for 10 
+	Prevents your opponent from
+	casting spells for 10
 	seconds and mutes them.
 ]]
 
@@ -37,7 +37,7 @@ function Spell:Draw(spell)
 
 	render.SetMaterial(mat)
 	render.DrawSprite(spell:GetPos(), 64, 64, self.SpriteColor)
-	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)	
+	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)
 end
 
 function Spell:OnFire(wand)
@@ -63,10 +63,10 @@ function Spell:OnCollide(spell, data)
 			end)
 
 			timer.Create(name, 10, 1, function()
-				if IsValid(ent) then 
-					HpwRewrite:BlockSpelling(ent, false) 
+				if IsValid(ent) then
+					HpwRewrite:BlockSpelling(ent, false)
 				end
-				
+
 				hook.Remove("PlayerSay", name)
 				hook.Remove("PlayerCanHearPlayersVoice", name)
 			end)

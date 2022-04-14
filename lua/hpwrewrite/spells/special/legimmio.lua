@@ -3,7 +3,7 @@ Spell.LearnTime = 60
 Spell.ApplyFireDelay = 0.6
 Spell.Category = { HpwRewrite.CategoryNames.Protecting, HpwRewrite.CategoryNames.Special }
 Spell.Description = [[
-	Blocks fall damage for 
+	Blocks fall damage for
 	a while.
 ]]
 

@@ -2,11 +2,11 @@ local Spell = { }
 Spell.LearnTime = 600
 Spell.Description = [[
 	A rather dangerous curse
-	when the incantation is uttered 
-	its effect is the equivalent of 
-	an invisible sword; it is used 
-	to slash the victim from a 
-	distance, causing rather deep 
+	when the incantation is uttered
+	its effect is the equivalent of
+	an invisible sword; it is used
+	to slash the victim from a
+	distance, causing rather deep
 	wounds.
 ]]
 
@@ -107,7 +107,7 @@ function Spell:AfterCollide(spell, data)
 		if ent:IsNPC() or ent:IsPlayer() then 
 			doSounds(ent)
 
-			for i = 1, ent:GetBoneCount() - 1 do 
+			for i = 1, ent:GetBoneCount() - 1 do
 				if i % 4 == 0 then
 					local pos = ent:GetBonePosition(i)
 

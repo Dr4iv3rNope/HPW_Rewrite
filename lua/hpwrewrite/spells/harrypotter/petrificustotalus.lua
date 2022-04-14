@@ -1,9 +1,9 @@
 local Spell = { }
 Spell.LearnTime = 360
 Spell.Description = [[
-	A curse that paralyses the 
-	opponent. It is often used 
-	by inexperienced or young 
+	A curse that paralyses the
+	opponent. It is often used
+	by inexperienced or young
 	wizards in duelling.
 ]]
 
@@ -31,11 +31,11 @@ function Spell:Draw(spell)
 		dlight.Decay = 1000
 		dlight.Size = 128
 		dlight.DieTime = CurTime() + 1
-	end	
+	end
 
 	render.SetMaterial(mat)
 	render.DrawSprite(spell:GetPos(), 64, 64, self.SpriteColor)
-	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)	
+	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)
 end
 
 function Spell:OnSpellSpawned(wand, spell)

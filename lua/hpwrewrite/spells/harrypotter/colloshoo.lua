@@ -2,8 +2,8 @@ local Spell = { }
 Spell.LearnTime = 120
 Spell.ApplyFireDelay = 0.4
 Spell.Description = [[
-	A hex used to make the 
-	target's shoes stick to 
+	A hex used to make the
+	target's shoes stick to
 	the ground.
 ]]
 

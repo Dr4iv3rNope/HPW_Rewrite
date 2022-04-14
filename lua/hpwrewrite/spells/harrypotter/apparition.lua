@@ -1,11 +1,11 @@
 local Spell = { }
 Spell.LearnTime = 900
 Spell.Description = [[
-	Turns you into smoke with 
-	which you can fly around 
+	Turns you into smoke with
+	which you can fly around
 	the world.
 
-	You can change smoke color 
+	You can change smoke color
 	in clientside options.
 ]]
 
@@ -77,7 +77,7 @@ function Spell:SetEnabled(val)
 			e:SetPos(pos + vec)
 			e:Spawn()
 
-			util.SpriteTrail(e, 0, HpwRewrite.Colors.White, true, 0, 32, 1.8, 1, mat) 
+			util.SpriteTrail(e, 0, HpwRewrite.Colors.White, true, 0, 32, 1.8, 1, mat)
 
 			e:SetColor(Color(0, 0, 0, 0))
 			e:SetRenderMode(RENDERMODE_TRANSALPHA)
@@ -131,12 +131,12 @@ function Spell:Think()
 		ang:RotateAroundAxis(ang:Right(), 12)
 		self.EffectAtt:SetAngles(ang)
 	end
-	
+
 	local speed = (self.Owner:KeyDown(IN_SPEED) and 4300 or 2400)
 	self.Owner:SetVelocity((-self.Owner:GetVelocity() + self.Owner:GetAimVector() * speed + VectorRand() * 400) * 0.035)
 
-	if self.Owner:IsOnGround() or self.Owner:WaterLevel() > 2 then 
-		self:SetEnabled(false) 
+	if self.Owner:IsOnGround() or self.Owner:WaterLevel() > 2 then
+		self:SetEnabled(false)
 		HpwRewrite.MakeEffect(self.UseWhiteSmoke and "hpw_apparation_white_impact" or "hpw_apparation_black_impact", self.Owner:GetPos())
 	end
 end

@@ -5,17 +5,17 @@ Spell.Category = HpwRewrite.CategoryNames.Healing
 Spell.OnlyIfLearned = { "Episkey" }
 
 Spell.Description = [[
-	For maximum effect of the 
-	spell, the incantation had 
-	to be repeated thrice; 
-	firstly slowing the flow 
-	of blood to prevent death by 
-	exsanguination; the second 
-	to clear residue and begin 
-	to heal the wounds; and the 
-	third to fully knit the 
-	wounds, although dittany 
-	had to be applied to prevent 
+	For maximum effect of the
+	spell, the incantation had
+	to be repeated thrice;
+	firstly slowing the flow
+	of blood to prevent death by
+	exsanguination; the second
+	to clear residue and begin
+	to heal the wounds; and the
+	third to fully knit the
+	wounds, although dittany
+	had to be applied to prevent
 	scarring.
 
 	This is counter-spell to

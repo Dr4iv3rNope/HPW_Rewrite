@@ -30,7 +30,7 @@ function Spell:OnCollide(spell, data)
 	
 	if IsValid(ply) and ply:IsPlayer() then
 		local wand = HpwRewrite:GetWand(ply)
-		
+
 		if not (wand:IsValid() and wand == ply:GetActiveWeapon() and wand:GetWandCurrentSkin() == "Demonic Wand") then
 			net.Start("hpwrewrite_Hell")
 			net.Send(ply)
@@ -45,13 +45,13 @@ HpwRewrite:AddSpell("Holy Hell", Spell)
 local Spell = { }
 Spell.LearnTime = 999
 Spell.Description = [[
-	Cast this three times to make 
-	hell free area, then start 
-	casting until you teleport 
+	Cast this three times to make
+	hell free area, then start
+	casting until you teleport
 	from hell.
 
-	Counter-spell to Holy Hell. 
-	Works only if you're under 
+	Counter-spell to Holy Hell.
+	Works only if you're under
 	hell effect.
 ]]
 Spell.FlyEffect = "hpw_crucio_main"

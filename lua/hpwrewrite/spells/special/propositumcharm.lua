@@ -50,7 +50,7 @@ function Spell:OnFire(wand)
 					local snd = ent:GetSound(note)
 					if snd then ent:EmitSound(snd, 80) end
 				end
-				
+
 				nextNote = nextNote + 1
 				nextPlay = CurTime() + 0.23
 			end

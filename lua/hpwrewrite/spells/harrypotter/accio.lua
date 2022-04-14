@@ -37,7 +37,7 @@ end
 
 function Spell:Think()
 	if CLIENT then return end
-	
+
 	local ent = self.Prop
 	local ply = self.Owner
 
@@ -45,7 +45,7 @@ function Spell:Think()
 
 	local phys = ent:GetPhysicsObject()
 	if not IsValid(phys) then return end
-	
+
 	phys:ApplyForceCenter((ply:GetPos() - ent:GetPos()):GetNormal() * ent:GetPos():Distance(ply:GetPos()) * phys:GetMass() * 0.08)
 	phys:ApplyForceCenter(-phys:GetVelocity() * phys:GetMass() * 0.04)
 	phys:AddAngleVelocity(VectorRand() * phys:GetMass() * 0.1)

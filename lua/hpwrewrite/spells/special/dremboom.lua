@@ -48,7 +48,7 @@ function Spell:OnCollide(spell, data)
 	sound.Play("ambient/explosions/explode_6.wav", data.HitPos, 120, 210)
 	sound.Play("ambient/explosions/explode_8.wav", data.HitPos, 100, 110)
 	sound.Play("ambient/explosions/explode_5.wav", data.HitPos, 100, 110)
-	
+
 	local i = 10
 	timer.Create("hpwrewrite_dremboom_handler" .. spell:EntIndex(), 0.01, 75, function()
 		i = i + 20

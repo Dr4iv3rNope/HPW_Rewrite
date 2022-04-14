@@ -5,7 +5,7 @@ Spell.Description = [[
 
 	Casted on NPC will just
 	stop it from attacking you
-	due to Source 
+	due to Source
 	engine limitations.
 ]]
 Spell.Category = HpwRewrite.CategoryNames.Fight
@@ -30,7 +30,7 @@ else
 
 		hook.Add("AdjustMouseSensitivity", "hpwrewrite_impedimenta_handler", function(def)
 			if CurTime() > endTime then hook.Remove("AdjustMouseSensitivity", "hpwrewrite_impedimenta_handler") return 1 end
-			
+
 			local a = endTime - CurTime()
 
 			if a > 7 then
@@ -70,8 +70,8 @@ function Spell:OnCollide(spell, data)
 			ent:SetJumpPower(oldP * 0.1)
 
 			local wep = ent:GetActiveWeapon()
-			if IsValid(wep) then 
-				wep:SetNextPrimaryFire(CurTime() + 7) 
+			if IsValid(wep) then
+				wep:SetNextPrimaryFire(CurTime() + 7)
 				wep:SetNextSecondaryFire(CurTime() + 7)
 			end
 
@@ -89,10 +89,10 @@ function Spell:OnCollide(spell, data)
 			local endTime = CurTime() + 10
 
 			hook.Add("Think", name, function()
-				if not IsValid(ent) or CurTime() > endTime then 
+				if not IsValid(ent) or CurTime() > endTime then
 					undereff[ent] = nil
-					hook.Remove("Think", name) 
-					return 
+					hook.Remove("Think", name)
+					return
 				end
 
 				ent:ClearSchedule()

@@ -2,7 +2,7 @@ local Spell = { }
 Spell.LearnTime = 60
 Spell.Description = [[
 	Water making spell.
-	Can fill up drink 
+	Can fill up drink
 	entities.
 ]]
 
@@ -21,8 +21,8 @@ function Spell:OnSpellSpawned(wand, spell)
 end
 
 local function SpillableDrinks(ent)
-	if ent.Beer then 
-		ent.Beer = ent.Beer + 10 
+	if ent.Beer then
+		ent.Beer = ent.Beer + 10
 		ent:EmitSound("ambient/water/rain_drip" .. math.random(1, 4) .. ".wav", 68)
 	end
 end
@@ -42,7 +42,7 @@ function Spell:OnFire(wand)
 	if IsValid(ent) then
 		local class = ent:GetClass()
 
-		if validSents[ent:GetClass()] then 
+		if validSents[ent:GetClass()] then
 			validSents[ent:GetClass()](ent)
 			return false
 		else
@@ -64,8 +64,8 @@ function Spell:OnCollide(spell, data)
 	local pos = data.HitPos
 	local ang = data.HitNormal:Angle()
 
-	for i = 1, math.random(2, 3) do 
-		ParticleEffect("water_splash_0" .. math.random(1, 3), pos, ang) 
+	for i = 1, math.random(2, 3) do
+		ParticleEffect("water_splash_0" .. math.random(1, 3), pos, ang)
 	end
 
 	local ef = EffectData()

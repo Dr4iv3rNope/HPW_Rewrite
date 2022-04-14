@@ -43,20 +43,20 @@ function Spell:OnCollide(spell, data)
 				hook.Remove("Think", name)
 				return
 			end
-			
+
 			if ent:Health() < newHp then
 				ent:SetHealth(ent:Health() + 1)
-				
-				local sc = 1 + (ent:Health() - oldHp) / (newHp - oldHp)	
+
+				local sc = 1 + (ent:Health() - oldHp) / (newHp - oldHp)
 				local col = (1 - sc) * 255
 				ent:SetColor(Color(255, col, col))
-						
+
 				if bone then
 					ent:ManipulateBoneScale(bone, Vector(sc, sc, sc))
 				end
 			else
 				ent:SetColor(Color(255, 255, 255))
-						
+
 				if bone then
 					ent:ManipulateBoneScale(bone, Vector(1, 1, 1))
 				end

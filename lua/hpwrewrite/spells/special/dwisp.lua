@@ -1,7 +1,7 @@
 local Spell = { }
 Spell.LearnTime = 240
 Spell.Description = [[
-	More dangerous damaging 
+	More dangerous damaging
 	spell.
 ]]
 Spell.FlyEffect = "hpw_tarantal_main"

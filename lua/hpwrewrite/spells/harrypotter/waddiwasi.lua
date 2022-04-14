@@ -35,7 +35,7 @@ function Spell:Draw(spell)
 
 	render.SetMaterial(mat)
 	render.DrawSprite(spell:GetPos(), 64, 64, self.SpriteColor)
-	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)	
+	render.DrawSprite(spell:GetPos(), 128, 50, self.SpriteColor)
 end
 
 function Spell:OnSpellSpawned(wand, spell)
@@ -89,7 +89,7 @@ function Spell:OnCollide(spell, data)
 		if not phys:IsValid() then return end
 
 		phys:SetVelocity(Vector(0, 0, 320))
-		
+
 		timer.Create("hpwrewrite_waddiwasi_helper" .. ent:EntIndex(), 0.3, 1, function()
 			if enemy:IsValid() and phys:IsValid() and ent:IsValid() and ent:Visible(enemy) then
 				local pos1 = enemy:LocalToWorld(enemy:OBBCenter())

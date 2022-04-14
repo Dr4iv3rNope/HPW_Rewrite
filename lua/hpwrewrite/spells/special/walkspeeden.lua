@@ -3,7 +3,7 @@ Spell.LearnTime = 60
 Spell.ApplyFireDelay = 0.6
 Spell.Category = HpwRewrite.CategoryNames.Special
 Spell.Description = [[
-	Makes your legs move with 
+	Makes your legs move with
 	abnormal speed.
 ]]
 
@@ -34,8 +34,8 @@ function Spell:OnFire(wand)
 
 				if inverse then
 					speed = math.Approach(speed, oldspeed, FrameTime() * 200)
-					if speed <= oldspeed then 
-						hook.Remove("Think", name) 
+					if speed <= oldspeed then
+						hook.Remove("Think", name)
 						ent:ConCommand("-forward")
 						ent:ConCommand("-speed")
 					end

@@ -34,7 +34,7 @@ function Spell:AfterCollide(spell, data)
 
 	local rag, func, name = HpwRewrite:ThrowEntity(ent, spell:GetFlyDirection(), nil, nil, self.Owner)
 
-	if IsValid(rag) then 
+	if IsValid(rag) then
 		ent = rag
 		timer.Remove(name)
 	elseif ent:GetClass() != "prop_physics" then
@@ -45,7 +45,7 @@ function Spell:AfterCollide(spell, data)
 	if not phys:IsValid() then return end
 
 	phys:EnableGravity(false)
-	for i = 1, ent:GetPhysicsObjectCount() - 1 do 
+	for i = 1, ent:GetPhysicsObjectCount() - 1 do
 		local bone = ent:GetPhysicsObjectNum(i)
 		bone:EnableGravity(false)
 	end
@@ -58,7 +58,7 @@ function Spell:AfterCollide(spell, data)
 		if not ent:IsValid() then hook.Remove("Think", hName) return end
 		if ent:GetModelScale() <= 0 then SafeRemoveEntity(ent) return end
 
-		for i = 1, ent:GetPhysicsObjectCount() - 1 do 
+		for i = 1, ent:GetPhysicsObjectCount() - 1 do
 			local bone = ent:GetPhysicsObjectNum(i)
 			bone:ApplyForceCenter((hitPos - bone:GetPos()) * hitPos:Distance(bone:GetPos()) * bone:GetMass() * 0.7 - bone:GetVelocity() * 0.3)
 		end

@@ -1,7 +1,7 @@
 local Spell = { }
 Spell.LearnTime = 300
 Spell.Description = [[
-	Make some machines' fuel 
+	Make some machines' fuel
 	magically disappear.
 ]]
 Spell.FlyEffect = "hpw_expulso_main"
@@ -57,7 +57,7 @@ function Spell:OnCollide(spell, data)
 			ent.Fuel = ent.Fuel - 5000
 			ent.Fuel = math.Clamp(ent.Fuel, 0, ent.MaxFuel)
 		end
-		
+
 		if string.find(ent:GetClass(), "acf_fueltank") then
 			if ent.Fuel > 0 then
 				ent.Fuel = math.Clamp(ent.Fuel - ent.Capacity*math.Rand(0.01,0.1),0,ent.Capacity)

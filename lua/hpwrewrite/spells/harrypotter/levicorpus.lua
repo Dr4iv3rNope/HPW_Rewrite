@@ -3,8 +3,8 @@ Spell.LearnTime = 480
 Spell.ApplyFireDelay = 0.4
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Causes the victim to be 
-	hoisted into the air by 
+	Causes the victim to be
+	hoisted into the air by
 	their ankle.
 ]]
 
@@ -20,7 +20,7 @@ function Spell:GetAnimations()
 end
 
 function Spell:Empty()
-	if IsValid(self.Victim) then 
+	if IsValid(self.Victim) then
 		sound.Play("ambient/machines/thumper_dust.wav", self.Victim:GetPos(), 70, 120)
 
 		if self.Function and self.FName then
@@ -38,7 +38,7 @@ end
 function Spell:OnFire(wand)
 	if wand:GetWandCurrentSpell() != self.Name then return end
 
-	if IsValid(self.Victim) then 
+	if IsValid(self.Victim) then
 		self:Empty()
 		return
 	end
@@ -51,11 +51,11 @@ function Spell:OnFire(wand)
 
 		local rag, func, name = HpwRewrite:ThrowEntity(ent, nil, 0, 15, self.Owner)
 
-		if IsValid(rag) then 
+		if IsValid(rag) then
 			local pos = rag:GetPos()
 
 			self.Victim = rag
-			self.Function = func 
+			self.Function = func
 			self.FName = name
 			self.Distance = self.Owner:GetPos():Distance(pos)
 
@@ -69,7 +69,7 @@ end
 
 function Spell:Think()
 	if CLIENT then return end
-	
+
 	local ent = self.Victim
 	local ply = self.Owner
 
@@ -77,7 +77,7 @@ function Spell:Think()
 	if not ply:Alive() then self:Empty() return end
 	if not self.Distance then self:Empty() return end
 	if ent:GetPos():Distance(ply:GetPos()) > 500 then self:Empty() return end
-	
+
 	local ang = ply:EyeAngles()
 	ang.p = ang.p * 0.6
 
@@ -86,12 +86,12 @@ function Spell:Think()
 		endpos = ply:GetShootPos() + ang:Forward() * self.Distance,
 		filter = { ent, ply }
 	})
-	
+
 	tr.HitPos = tr.HitPos + vector_up * 30
 
 	local phys = ent:GetPhysicsObject()
 	local phys1, phys2 = ent:GetPhysicsObjectNum(12), ent:GetPhysicsObjectNum(14)
-	
+
 	if IsValid(phys1) and IsValid(phys2) then
 		phys1:ApplyForceCenter((tr.HitPos - phys1:GetPos()):GetNormal() * tr.HitPos:Distance(phys1:GetPos()) * phys:GetMass())
 		phys2:ApplyForceCenter((tr.HitPos - phys2:GetPos()):GetNormal() * tr.HitPos:Distance(phys2:GetPos()) * phys:GetMass())

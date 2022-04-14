@@ -2,9 +2,9 @@ local Spell = { }
 Spell.LearnTime = 450
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Pulling spell. Creates 
-	magical rope that can pull 
-	objects to you or pull you 
+	Pulling spell. Creates
+	magical rope that can pull
+	objects to you or pull you
 	to the point you're looking at.
 
 	To pull yourself hold
@@ -46,7 +46,7 @@ function Spell:OnFire(wand)
 
 	local rope = ents.Create("info_hpwand_magicalrope")
 	rope:SetPos(tr.HitPos)
-	
+
 	if IsValid(self.PullEntity) and self.PullEntity != self.Owner then
 		rope:SetParent(self.PullEntity)
 	end
@@ -80,10 +80,10 @@ function Spell:Think(wand)
 		local dist = ourPos:Distance(self.Position)
 		if dist >= 2000 then self:Exit() return end
 
-		if dist <= 100 then 
+		if dist <= 100 then
 			self.Owner:SetVelocity(-self.Owner:GetVelocity() * 0.65)
 			self:Exit()
-			return 
+			return
 		end
 
 		local dir = (self.Position - ourPos):GetNormal()
@@ -97,10 +97,10 @@ function Spell:Think(wand)
 		local dist = ourPos:Distance(phys:GetPos())
 		if dist >= 4000 then self:Exit() return end
 
-		if dist <= math.max(120, self.PullEntity:GetModelRadius() * 1.4) then 
+		if dist <= math.max(120, self.PullEntity:GetModelRadius() * 1.4) then
 			phys:SetVelocity(vector_origin)
 			self:Exit()
-			return 
+			return
 		end
 
 		local dir = (ourPos - phys:GetPos()):GetNormal()

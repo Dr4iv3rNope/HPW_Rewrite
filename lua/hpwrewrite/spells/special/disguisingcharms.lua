@@ -1,8 +1,8 @@
 local Spell = { }
 Spell.LearnTime = 360
 Spell.Description = [[
-	Disguising spell, disguises 
-	anything this spell hits 
+	Disguising spell, disguises
+	anything this spell hits
 	from players' eyes for
 	a while.
 ]]
@@ -30,8 +30,8 @@ local undereff = { }
 local function RemoveOcculto(ent)
 	if not undereff[ent] then return end
 
-	if IsValid(ent) then 
-		ent:SetNoDraw(false) 
+	if IsValid(ent) then
+		ent:SetNoDraw(false)
 		sound.Play("npc/turret_floor/active.wav", ent:GetPos(), 65, 180)
 
 		timer.Remove("hpwrewrite_occulto_handler" .. ent:EntIndex())
@@ -61,7 +61,7 @@ Spell.LearnTime = 360
 Spell.Description = [[
 	Counter-spell to Hiding Charm,
 	removes disguising effect
-	from everything in small area around 
+	from everything in small area around
 	spell hit position.
 ]]
 --Spell.WhatToSay = "Reveal"

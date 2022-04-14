@@ -5,11 +5,11 @@ Spell.CanSelfCast = false
 Spell.OnlyIfLearned = { "Reducto", "Expulso" }
 Spell.ForceAnim = { ACT_VM_PRIMARYATTACK, ACT_VM_PRIMARYATTACK_1 }
 Spell.Description = [[
-	The incantation of a charm 
-	used to provoke small 
-	explosions; one use for this 
-	explosion is to blast open 
-	sealed doors or to blow bars 
+	The incantation of a charm
+	used to provoke small
+	explosions; one use for this
+	explosion is to blast open
+	sealed doors or to blow bars
 	off of windows.
 ]]
 

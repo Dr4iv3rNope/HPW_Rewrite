@@ -24,7 +24,7 @@ end
 function Spell:AfterCollide(spell, data)
 	local ent = HpwRewrite:ThrowEntity(data.HitEntity, spell:GetFlyDirection(), nil, 0.7, self.Owner)
 
-	if IsValid(ent) then 
+	if IsValid(ent) then
 		sound.Play("npc/zombie/claw_strike" .. math.random(1, 3) .. ".wav", ent:GetPos(), 70, math.random(90, 110))
 
 		local phys = ent:GetPhysicsObject()
@@ -34,4 +34,4 @@ function Spell:AfterCollide(spell, data)
 	end
 end
 
-HpwRewrite:AddSpell("Rictusempra", Spell)	
+HpwRewrite:AddSpell("Rictusempra", Spell)

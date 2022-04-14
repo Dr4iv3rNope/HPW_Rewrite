@@ -1,7 +1,7 @@
 local Spell = { }
 Spell.LearnTime = 390
 Spell.Description = [[
-	Blasts the target apart with 
+	Blasts the target apart with
 	a burst of blue light.
 ]]
 Spell.Category = HpwRewrite.CategoryNames.Fight

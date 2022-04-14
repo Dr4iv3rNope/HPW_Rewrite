@@ -1,6 +1,6 @@
 local Spell = { }
 Spell.Description = [[
-	Like in every game about 
+	Like in every game about
 	magic.
 ]]
 Spell.FlyEffect = "hpw_fireballspell"

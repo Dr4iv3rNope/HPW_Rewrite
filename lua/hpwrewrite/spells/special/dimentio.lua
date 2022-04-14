@@ -1,10 +1,10 @@
 local Spell = { }
 Spell.LearnTime = 600
 Spell.Description = [[
-	Draws the target away from 
-	the humans' world to another 
-	dimension. Target is able to 
-	move but no one can feel it's 
+	Draws the target away from
+	the humans' world to another
+	dimension. Target is able to
+	move but no one can feel it's
 	precense or see it.
 ]]
 Spell.FlyEffect = "hpw_sectumsemp_main"
@@ -31,7 +31,7 @@ function Spell:OnCollide(spell, data)
 	if IsValid(ply) and ply:IsPlayer() then
 		--if not ply.HpwRewrite.WasInDimension then
 			ply.HpwRewrite.InDimension = true
-			
+
 			local oldWep = ""
 			if IsValid(ply:GetActiveWeapon()) then oldWep = ply:GetActiveWeapon():GetClass() end
 
@@ -73,19 +73,19 @@ if SERVER then
 			return true
 		end
 	end)
-	
+
 	hook.Add("PlayerCanPickupItem","HPWDimensioStopIPickup",function(who)
 		if who.HpwRewrite.InDimension == true then
 			return false
 		end
 	end)
-	
+
 	hook.Add("PlayerCanPickupWeapon","HPWDimensioStopWPickup",function(who)
 		if who.HpwRewrite.InDimension == true then
 			return false
 		end
 	end)
-	
+
 	hook.Add("PlayerUse","HPWDimensioStopUse",function(who)
 		if who.HpwRewrite.InDimension == true then
 			return false

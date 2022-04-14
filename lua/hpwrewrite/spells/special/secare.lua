@@ -32,11 +32,11 @@ function Spell:SpellThink(spell)
 	if SERVER then return end
 
 	if not spell.Emitter then
-		spell.Emitter = ParticleEmitter(spell:GetPos()) 
+		spell.Emitter = ParticleEmitter(spell:GetPos())
 		return
 	end
 
-	
+
 	local die = math.Rand(0.7, 2.6)
 	local vel = VectorRand() * 40 + spell:GetFlyDirection() * 300
 	local res = math.random(15, 40)
@@ -90,7 +90,7 @@ function Spell:OnCollide(spell, data)
 			if not pos then pos = ent:GetPos() end
 
 			sound.Play("weapons/knife/knife_hit" .. math.random(1, 4) .. ".wav", pos, 70)
-			if math.random(0, 1) == 1 then 
+			if math.random(0, 1) == 1 then
 				sound.Play("physics/flesh/flesh_squishy_impact_hard" .. math.random(1, 4) .. ".wav", pos, 70)
 
 				local ef = EffectData()

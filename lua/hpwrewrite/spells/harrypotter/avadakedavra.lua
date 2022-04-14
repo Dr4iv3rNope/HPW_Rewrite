@@ -20,13 +20,13 @@ Spell.NodeOffset = Vector(938, -511, 0)
 local mat = Material("cable/hydra")
 local mat2 = Material("cable/xbeam")
 
-Spell.FightingEffect = function(nPoints, points) 
+Spell.FightingEffect = function(nPoints, points)
 	render.SetMaterial(mat)
 	for i = 1, 3 do
 		render.StartBeam(nPoints)
 			for k, v in pairs(points) do
 				render.AddBeam(v, (k / nPoints) * 60, math.Rand(0, 2), color_white)
-			end 
+			end
 		render.EndBeam()
 	end
 
@@ -80,7 +80,7 @@ function Spell:OnCollide(spell, data)
 	if IsValid(ent) then
 		local force = spell:GetFlyDirection() * 10000
 
-		if ent:IsNPC() or ent:IsPlayer() then 
+		if ent:IsNPC() or ent:IsPlayer() then
 			HpwRewrite.TakeDamage(ent, self.Owner, ent:Health(), force)
 		elseif ent.HPWRagdolledEnt then
 			HpwRewrite.TakeDamage(ent, self.Owner, ent.MaxPenetration, force)

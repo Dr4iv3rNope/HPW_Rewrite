@@ -53,7 +53,7 @@ function Spell:OnCollide(spell, data)
 					ef:SetOrigin(pos)
 					util.Effect("Explosion", ef, true, true)
 
-					for i = 1, ent:GetBoneCount() - 1 do 
+					for i = 1, ent:GetBoneCount() - 1 do
 						if i % 2 == 0 then
 							local pos = ent:GetBonePosition(i)
 
@@ -66,27 +66,27 @@ function Spell:OnCollide(spell, data)
 							end)
 						end
 					end
-					
+
 					local def = Vector(1, 1, 1)
 					local defa = Angle(0, 0, 0)
-					for k, v in pairs(scales) do 
-						ent:ManipulateBoneScale(k, def) 
+					for k, v in pairs(scales) do
+						ent:ManipulateBoneScale(k, def)
 						ent:ManipulateBoneAngles(k, defa)
 					end
-				
+
 					util.BlastDamage(ent, ent, pos, 120, 50)
 					ent:TakeDamage(ent:Health(), self.Owner, HpwRewrite:GetWand(self.Owner))
 
-					if ent:IsNPC() then 
+					if ent:IsNPC() then
 						SafeRemoveEntity(ent)
-					elseif ent:IsPlayer() then 
-						SafeRemoveEntity(ent:GetRagdollEntity()) 
+					elseif ent:IsPlayer() then
+						SafeRemoveEntity(ent:GetRagdollEntity())
 					end
 				end
 
 				return
 			end
-			
+
 			local x = CurTime()
 			for k, v in pairs(scales) do
 				scales[k] = scales[k] + math.Rand(-0.005, 0.01)

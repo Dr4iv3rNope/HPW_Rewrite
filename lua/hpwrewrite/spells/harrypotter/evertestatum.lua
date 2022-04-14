@@ -2,11 +2,11 @@ local Spell = { }
 Spell.LearnTime = 60
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Causes opponent to fly back 
+	Causes opponent to fly back
 	several feet. Being casted
 	on object will push it away.
 
-	Note that it doesn't deal 
+	Note that it doesn't deal
 	any damage!
 ]]
 

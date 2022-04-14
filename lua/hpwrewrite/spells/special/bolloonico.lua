@@ -83,18 +83,18 @@ function Spell:AfterCollide(spell, data)
 						0.5,
 						"cable/rope"
 					)
-				
+
 					balloons = balloons + 1
 
 					timer.Simple(math.Rand(2, 8), function()
 						balloons = balloons - 1
 						if IsValid(balloon) then balloon:TakeDamage(1) end
-						if balloons <= 0 then 
+						if balloons <= 0 then
 							if rag:IsValid() then
 								timer.Simple(0.3, function() -- let us get some velocity
 									HpwRewrite.Throwing_TimerReviveFunc(rag, name, "hpwrewrite_ballonico_handler" .. rag:EntIndex(), 2, func)
 								end)
-							end 
+							end
 						end
 					end)
 				end)

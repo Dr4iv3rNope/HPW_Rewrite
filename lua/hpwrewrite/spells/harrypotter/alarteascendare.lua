@@ -5,7 +5,7 @@ Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.OnlyIfLearned = { "Arresto Momentum" }
 Spell.SpriteColor = Color(255, 0, 0)
 Spell.Description = [[
-	Used to launch the object up 
+	Used to launch the object up
 	into the air.
 ]]
 

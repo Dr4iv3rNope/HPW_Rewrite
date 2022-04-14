@@ -1,12 +1,12 @@
 local Spell = { }
 Spell.LearnTime = 90
 Spell.Description = [[
-	Used to increase the size 
-	of the target by inflating 
-	it; once inflated beyond the 
-	maximum capacity of its outer 
-	size, the targeted creature 
-	will explode into colourful 
+	Used to increase the size
+	of the target by inflating
+	it; once inflated beyond the
+	maximum capacity of its outer
+	size, the targeted creature
+	will explode into colourful
 	party balloons.
 ]]
 
@@ -35,7 +35,7 @@ function Spell:AfterCollide(spell, data)
 		if timer.Exists(name) then return end
 
 		ent:EmitSound("hl1/ambience/particle_suck2.wav", 60, 110)
-		
+
 		if ent:IsNPC() or ent:IsPlayer() then
 			local size = 1
 			hook.Add("Think", name, function()

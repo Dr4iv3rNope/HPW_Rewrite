@@ -59,7 +59,7 @@ function HpwRewrite.VGUI:CreateWindow(w, h, vis)
 		surface.SetDrawColor(HpwRewrite.Colors.DarkGrey)
 		surface.DrawOutlinedRect(0, 0, w, h)
 	end
-	
+
 	win.OnCloseButton = function(self) end
 
 	local old = win.Close
@@ -73,8 +73,8 @@ function HpwRewrite.VGUI:CreateWindow(w, h, vis)
 		end
 	end
 
-	win.SetupCloseButton = function(win) 
-		if IsValid(win.CloseBtn) then 
+	win.SetupCloseButton = function(win)
+		if IsValid(win.CloseBtn) then
 			win.CloseBtn:SetPos(win:GetWide() - 25, 0)
 			return
 		end
@@ -107,9 +107,9 @@ function HpwRewrite.VGUI:CreateButton(text, x, y, w, h, win, func)
 	btn.DrawDiff = true
 	btn.EnterColor = HpwRewrite.Colors.Blue
 
-	btn.OnCursorEntered = function(self) 
-		if self.DoSound then surface.PlaySound("hpwrewrite/enterbtn.wav") end 
-		self.entered = true 
+	btn.OnCursorEntered = function(self)
+		if self.DoSound then surface.PlaySound("hpwrewrite/enterbtn.wav") end
+		self.entered = true
 		self.EnterAlpha = 255
 	end
 
@@ -225,13 +225,13 @@ function HpwRewrite.VGUI:CreateSheet(x, y, w, h, parent)
 	local sheet = vgui.Create("DPropertySheet", parent)
 	sheet.tabScroller:SetOverlap(-1)
 
-	sheet.tabScroller.btnLeft.Paint = function(self, w, h) 
+	sheet.tabScroller.btnLeft.Paint = function(self, w, h)
 		surface.SetMaterial(arrow)
 		surface.SetDrawColor(HpwRewrite.Colors.White)
 		surface.DrawTexturedRectRotated(w / 2, h / 2, w, h, 180)
 	end
 
-	sheet.tabScroller.btnRight.Paint = function(self, w, h) 
+	sheet.tabScroller.btnRight.Paint = function(self, w, h)
 		surface.SetMaterial(arrow)
 		surface.SetDrawColor(HpwRewrite.Colors.White)
 		surface.DrawTexturedRectRotated(w / 2, h / 2, w, h, 0)
@@ -272,7 +272,7 @@ function HpwRewrite.VGUI:SetupSheetDrawing(sheet, activecolor)
 
 		local old = v.Tab.DoClick
 		v.Tab.DoClick = function(self)
-			surface.PlaySound("hpwrewrite/clickbtn.wav") 
+			surface.PlaySound("hpwrewrite/clickbtn.wav")
 			old(self)
 		end
 
@@ -353,7 +353,7 @@ function HpwRewrite.VGUI:OpenSwapMenu(name)
 			p.Bind = HpwRewrite.BM.Binds[i]
 
 			local shift = 10
-			
+
 			p.Paint = function() end
 			p.PaintOver = function(p)
 				local spell, key
@@ -364,10 +364,10 @@ function HpwRewrite.VGUI:OpenSwapMenu(name)
 				end
 
 				HpwRewrite:DrawSpellRect(spell, key, 8, 8, w, h)
-				
+
 				local w = w - 4
 				local h = h - 4
-				
+
 				local color
 
 				if p == Dragging then
@@ -379,16 +379,16 @@ function HpwRewrite.VGUI:OpenSwapMenu(name)
 				elseif Waiting == p.Index then
 					color = Color(0, 155, 255, 100)
 				end
-				
-				if color then 
-					draw.RoundedBox(6, shift, shift, w, h, color) 
+
+				if color then
+					draw.RoundedBox(6, shift, shift, w, h, color)
 				end
 			end
-			
+
 			if p.Bind then
 				p.OnMousePressed = function(p, ms)
-					if ms == 107 then 
-						Dragging = p 
+					if ms == 107 then
+						Dragging = p
 						PosX, PosY = p:LocalCursorPos()
 					end
 				end
@@ -427,13 +427,13 @@ function HpwRewrite.VGUI:OpenSwapMenu(name)
 		oldThink(win)
 
 		if Dragging then
-			if not input.IsMouseDown(107) then 
+			if not input.IsMouseDown(107) then
 				if Waiting then
 					HpwRewrite.BM:MoveBindTo(Dragging.Index, Waiting, name)
 					Load()
 				end
 
-				Dragging = nil 
+				Dragging = nil
 			end
 		end
 	end
@@ -504,7 +504,7 @@ if not file.Exists(fName, "DATA") then
 	file.Write(fName, "")
 else
 	local tabs = string.Explode("¤", file.Read(fName))
-	if tabs then 
+	if tabs then
 		for k, v in pairs(tabs) do
 			closedTabs[v] = true
 		end
@@ -536,12 +536,12 @@ end
 local gradient = Material("gui/center_gradient")
 local sheetWidth = 572
 
-local function yesno(bool) 
-	return bool and HpwRewrite.Language:GetWord("#yes") or HpwRewrite.Language:GetWord("#no") 
+local function yesno(bool)
+	return bool and HpwRewrite.Language:GetWord("#yes") or HpwRewrite.Language:GetWord("#no")
 end
 
 function HpwRewrite.VGUI:OpenNewSpellManager()
-	if IsValid(self.Window) then 
+	if IsValid(self.Window) then
 		self.Window:SetVisible(true)
 		RestoreCursorPosition()
 
@@ -708,22 +708,22 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		createLab(HpwRewrite.Language:GetWord("#hasbook") .. yesno(spell.CreateEntity))
 		if spell.CreateEntity then createLab(HpwRewrite.Language:GetWord("#bookinqmenu") .. yesno(spell.ShowInSpawnmenu)) end
 
-		if spell.IsSkin then 
-			createLab(HpwRewrite.Language:GetWord("#holdtype") .. spell.HoldType) 
-		else 
+		if spell.IsSkin then
+			createLab(HpwRewrite.Language:GetWord("#holdtype") .. spell.HoldType)
+		else
 			createLab(HpwRewrite.Language:GetWord("#isselfcastable") .. yesno(spell.CanSelfCast))
 			if spell.CanSelfCast then
 				createLab(HpwRewrite.Language:GetWord("#reversedselfcast") .. yesno(spell.ShouldReverseSelfCast))
 			end
-			
-			--createLab("Is unforgivable: " .. yesno(spell.Unforgivable)) 
+
+			--createLab("Is unforgivable: " .. yesno(spell.Unforgivable))
 			createLab(HpwRewrite.Language:GetWord("#accuracycost") .. spell.AccuracyDecreaseVal * 100 .. "%")
 		end
 
 		if spell.Description != "" then
 			createLab("")
 			createLab(HpwRewrite.Language:GetWord("#description")):SetColor(HpwRewrite.Colors.Blue)
-			
+
 			local str = string.Explode("\n", spell.Description)
 			for i = 1, #str - 1 do
 				if str[i] then createLab(str[i]) end
@@ -753,7 +753,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			createLab("")
 		end
 
-		-- RESTRICTIOOONS 
+		-- RESTRICTIOOONS
 
 		if spell.OnlyWithSkin then
 			createLab("")
@@ -833,7 +833,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			infopanel.Think = function()
 				if SpellLearning != HpwRewrite.Learning then
 					SpellLearning = HpwRewrite.Learning
-					
+
 					if SpellLearning then
 						p = vgui.Create("DPanel", infopanel)
 						p:SetPos(0, pos + 49)
@@ -884,9 +884,9 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 
 						infopanel:SetSize(195, pos + 216)
 					else
-						if IsValid(p) then 
-							p:Remove() 
-							infopanel:SetSize(195, pos + 30) 
+						if IsValid(p) then
+							p:Remove()
+							infopanel:SetSize(195, pos + 30)
 						end
 					end
 				end
@@ -941,7 +941,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 				spellCategory.Paint = function() end
 				spells.SpellCats[k] = spellCategory
 
-				local btn = self:CreateButton(k, 0, 0, sheetWidth, defaultSize, spellCategory, function() 
+				local btn = self:CreateButton(k, 0, 0, sheetWidth, defaultSize, spellCategory, function()
 					closedTabs[k] = not closedTabs[k]
 					spellCategory.Hidden = closedTabs[k]
 				end)
@@ -974,7 +974,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 					if type(cat) == "table" then
 						if table.HasValue(cat, k) then cat = k else cat = nil end
 					end
-					
+
 					if (cat == k and not b.IsSkin) or (k == HpwRewrite.Language:GetWord("#favcategory") and HpwRewrite.FavouriteSpells[a]) then
 						if b.SecretSpell and not HpwRewrite:PlayerHasSpell(LocalPlayer(), a) then continue end
 						if not HpwRewrite:CanUseSpell(LocalPlayer(), a) then
@@ -999,7 +999,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 				end
 
 				for a, b in SortedPairs(useless) do
-					local btn = self:CreateButton(a, 0, getPos(), sheetWidth, 24, spellCategory, function() 
+					local btn = self:CreateButton(a, 0, getPos(), sheetWidth, 24, spellCategory, function()
 						CreateInfoPanel(a)
 					end)
 
@@ -1041,7 +1041,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		end
 
 		-- Updating skins
-		for k, v in pairs(skinsButtons) do 
+		for k, v in pairs(skinsButtons) do
 			if IsValid(v) then v:Remove() end
 			skinsButtons[k] = nil
 		end
@@ -1286,8 +1286,8 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		HpwRewrite.VGUI.CreateClientOptions(p)
 
 		local old = clientopt.PerformLayout
-		clientopt.PerformLayout = function(self, w, h) 
-			old(self, w, h) 
+		clientopt.PerformLayout = function(self, w, h)
+			old(self, w, h)
 			p:SetSize(self:GetWide(), p:GetTall())
 		end
 
@@ -1302,8 +1302,8 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		HpwRewrite.VGUI.CreateServerOptions(p)
 
 		local old = serveropt.PerformLayout
-		serveropt.PerformLayout = function(self, w, h) 
-			old(self, w, h) 
+		serveropt.PerformLayout = function(self, w, h)
+			old(self, w, h)
 			p:SetSize(self:GetWide(), p:GetTall())
 		end
 
@@ -1347,7 +1347,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		tree:SetPos(10, 10)
 		tree:SetSize(436, 30)
 		tree:SetFont("HPW_gui1")
-		
+
 		local function reload()
 			tree:Clear()
 			tree:SetText("")
@@ -1379,8 +1379,8 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		local swapIcons = { }
 
 		local function LoadSwapIcons()
-			for k, v in pairs(swapIcons) do 
-				if IsValid(v) then v:Remove() end 
+			for k, v in pairs(swapIcons) do
+				if IsValid(v) then v:Remove() end
 				swapIcons[k] = nil
 			end
 
@@ -1395,7 +1395,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 				p.Bind = HpwRewrite.BM.Binds[i]
 
 				local shift = 10
-						
+
 				p.Paint = function() end
 				p.PaintOver = function(p)
 					local spell, key
@@ -1406,10 +1406,10 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 					end
 
 					HpwRewrite:DrawSpellRect(spell, key, 8, 8, w, h)
-				
+
 					local w = w - 4
 					local h = h - 4
-							
+
 					local color
 
 					if p == Dragging then
@@ -1421,17 +1421,17 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 					elseif Waiting == p.Index then
 						color = Color(0, 155, 255, 100)
 					end
-							
-					if color then 
-						draw.RoundedBox(6, shift, shift, w, h, color) 
+
+					if color then
+						draw.RoundedBox(6, shift, shift, w, h, color)
 					end
 				end
-						
+
 				if p.Bind then
 					p.OnMousePressed = function(p, ms)
-						if ms == 107 then 
+						if ms == 107 then
 							surface.PlaySound("hpwrewrite/clickbtn.wav")
-							Dragging = p 
+							Dragging = p
 							PosX, PosY = p:LocalCursorPos()
 						end
 					end
@@ -1451,8 +1451,8 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		end
 
 		hook.Add("DrawOverlay", "hpwrewrite_dragndrophandler", function()
-			if not IsValid(binding) or not binding:IsVisible() then 
-				return 
+			if not IsValid(binding) or not binding:IsVisible() then
+				return
 			end
 
 			if Dragging then
@@ -1484,8 +1484,8 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			for k, v in pairs(btns) do if IsValid(v) then v:Remove() end end
 			table.Empty(btns)
 
-			for k, v in pairs(swapIcons) do 
-				if IsValid(v) then v:Remove() end 
+			for k, v in pairs(swapIcons) do
+				if IsValid(v) then v:Remove() end
 				swapIcons[k] = nil
 			end
 
@@ -1514,9 +1514,9 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 
 						text.ValidSpell = false
 
-						if txt == string.sub(k, 1, txt:len()) then 
+						if txt == string.sub(k, 1, txt:len()) then
 							if txt == k then text.ValidSpell = true end
-							text.Ghost = k 
+							text.Ghost = k
 							break
 						else
 							text.Ghost = ""
@@ -1676,14 +1676,14 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		-- Handlers
 		tree.OnSelect = function(panel, index, val)
 			local data, filename = HpwRewrite.DM:ReadBinds()
-			if data and data[val] then 
-				loadTree(data[val], val) 
+			if data and data[val] then
+				loadTree(data[val], val)
 			end
 		end
 
 		binding.Think = function(self)
 			if self.ShouldUpdate then
-				if oldname then 
+				if oldname then
 					local data, filename = HpwRewrite.DM:ReadBinds()
 					if data and data[oldname] then loadTree(data[oldname], oldname) end
 				end
@@ -1692,13 +1692,13 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			end
 
 			if Dragging then
-				if not input.IsMouseDown(107) then 
+				if not input.IsMouseDown(107) then
 					if Waiting and oldname then
 						HpwRewrite.BM:MoveBindTo(Dragging.Index, Waiting, oldname)
 						LoadSwapIcons()
 					end
 
-					Dragging = nil 
+					Dragging = nil
 				end
 			end
 		end
@@ -1741,11 +1741,11 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 		local function AddPlayers()
 			InPlayerMenu = false
 			EmptyButtons()
-			
+
 			for k, v in pairs(player.GetAll()) do
 				local btn = self:CreateButton(v:Name(), 0, (k - 1) * 26, 565, 25, spells, function()
 					selplayer = v
-					
+
 					net.Start("hpwrewrite_AdminFunctions")
 						net.WriteUInt(10, 5)
 						net.WriteEntity(v)
@@ -1843,10 +1843,10 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 	do
 		local spells = self:CreateScrollPanel(nil, nil, nil, nil, win, true)
 
-		local btn = self:CreateButton(Format(HpwRewrite.Language:GetWord("#foundspells"), table.Count(HpwRewrite:GetSpells())), 0, 0, 340, 25, spells, function() 
+		local btn = self:CreateButton(Format(HpwRewrite.Language:GetWord("#foundspells"), table.Count(HpwRewrite:GetSpells())), 0, 0, 340, 25, spells, function()
 		end)
 
-		local btn = self:CreateButton(HpwRewrite.Language:GetWord("#printconfig"), 341, 0, 220, 25, spells, function() 
+		local btn = self:CreateButton(HpwRewrite.Language:GetWord("#printconfig"), 341, 0, 220, 25, spells, function()
 			net.Start("hpwrewrite_AdminFunctions")
 				net.WriteUInt(13, 5)
 			net.SendToServer()
@@ -1871,7 +1871,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 					menu:AddOption(on, function()
 						local opt = options[on]
 
-						if not opt then 
+						if not opt then
 							HpwRewrite:DoNotify(HpwRewrite.Language:GetWord("#unknown"), 1)
 							return
 						end
@@ -1884,7 +1884,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 						ply:SetPos(10, 30)
 						ply:SetSize(180, 30)
 						ply:SetText("Player")
-						
+
 						for a, b in pairs(player.GetAll()) do
 							ply:AddChoice(b:Name())
 						end
@@ -1914,7 +1914,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 				end
 
 				if v.IsSkin then
-					menu:AddOption(defaultSkin, function() 
+					menu:AddOption(defaultSkin, function()
 						net.Start("hpwrewrite_AdminFunctions")
 							net.WriteUInt(1, 5)
 							net.WriteString(k)
@@ -1940,7 +1940,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 				btn:SetColor(HpwRewrite:IsSpellInBlacklist(k) and HpwRewrite.Colors.Red or HpwRewrite.Colors.Green)
 			end
 
-			local btn = self:CreateButton(addtoadminonly, 449, yPos, 107, 25, spells, function() 
+			local btn = self:CreateButton(addtoadminonly, 449, yPos, 107, 25, spells, function()
 				net.Start("hpwrewrite_AdminFunctions")
 					net.WriteUInt(12, 5)
 					net.WriteString(k)
@@ -1955,20 +1955,20 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 
 			i = i + 1
 		end
-		
+
 		sheet2:AddSheet(HpwRewrite.Language:GetWord("#manager"), spells, "icon16/report_edit.png")
 	end
 	self:SetupSheetDrawing(sheet2, HpwRewrite.Colors.DarkGrey5)
-	
+
 	if not HpwRewrite.CVars.HideTree:GetBool() then
 		sheet:AddSheet(HpwRewrite.Language:GetWord("#maintree"), newspells)
 	end
-	
+
 	sheet:AddSheet(HpwRewrite.Language:GetWord("#spelllist"), spells)
 	sheet:AddSheet(HpwRewrite.Language:GetWord("#wandskins"), skins)
 	sheet:AddSheet(HpwRewrite.Language:GetWord("#spellbinding"), binding)
 	sheet:AddSheet(HpwRewrite.Language:GetWord("#settingshelp"), info)
-	
+
 	if (not game.SinglePlayer() or HpwRewrite.CVars.DebugMode:GetBool()) and HpwRewrite.CheckAdmin(LocalPlayer()) then
 		sheet:AddSheet(HpwRewrite.Language:GetWord("#adminpanel"), admin)
 	end
@@ -2002,7 +2002,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 
 			--[[if SpellLearning != HpwRewrite.Learning then
 				SpellLearning = HpwRewrite.Learning
-					
+
 				if SpellLearning then
 					if HpwRewrite.LearningSpellName then
 						win.OldTitle = win.lblTitle:GetText()
@@ -2024,7 +2024,7 @@ function HpwRewrite.VGUI:OpenNewSpellManager()
 			if self.ShouldUpdate then
 				AddSpells()
 				if rememberSpell then CreateInfoPanel(rememberSpell) end
-				
+
 				self.ShouldUpdate = false
 			end
 

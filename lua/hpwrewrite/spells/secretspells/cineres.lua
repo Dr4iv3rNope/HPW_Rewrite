@@ -1,7 +1,7 @@
 local Spell = { }
 Spell.Description = [[
-	Dark space energy collapsed 
-	into a ball form to serve your 
+	Dark space energy collapsed
+	into a ball form to serve your
 	wish. Can dissolve things.
 ]]
 Spell.FlyEffect = "hpw_cineres_main"

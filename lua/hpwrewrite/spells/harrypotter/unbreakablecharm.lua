@@ -21,7 +21,7 @@ local undereff = { }
 
 if SERVER then
 	hook.Add("EntityTakeDamage", "hpwrewrite_unbreakablecharm_handler", function(ent, dmg)
-		if undereff[ent] then 
+		if undereff[ent] then
 			dmg:SetDamage(0)
 		end
 	end)

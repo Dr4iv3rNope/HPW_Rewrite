@@ -3,7 +3,7 @@ Spell.LearnTime = 150
 Spell.ApplyFireDelay = 0.5
 Spell.Category = HpwRewrite.CategoryNames.Physics
 Spell.Description = [[
-	Used to make heavy objects 
+	Used to make heavy objects
 	lighter in terms of weight.
 ]]
 
