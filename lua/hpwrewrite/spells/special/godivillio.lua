@@ -13,6 +13,8 @@ Spell.NodeOffset = Vector(-688, 274, 0)
 Spell.DoSelfCastAnim = false
 Spell.SpriteColor = Color(255, 255, 200)
 
+local EFFECT_DURATION = 5
+
 if SERVER then
 	util.AddNetworkString("hpwrewrite_godivillio_handler")
 else
@@ -71,8 +73,13 @@ else
 				DrawMaterialOverlay( "effects/flicker_256", math.sin(CurTime()*3)*0.02)
 				DrawMaterialOverlay( "particle/warp3_warp_noz", math.sin(CurTime()*3)*0.02)
 			end)
+
+			timer.Create("hpwrewriet_godivillio_effect_remove", EFFECT_DURATION, 1, function()
+				hook.Remove("RenderScreenspaceEffects", "hpwrewrite_godivillio_handler")
+			end)
 		else
 			hook.Remove("RenderScreenspaceEffects", "hpwrewrite_godivillio_handler")
+			timer.Remove("hpwrewriet_godivillio_effect_remove")
 		end
 	end)
 end
@@ -142,7 +149,7 @@ function Spell:OnFire(wand)
 			net.WriteEntity(ent)
 		net.Broadcast()
 
-		timer.Create("hpwrewrite_godivillio_handler" .. ent:EntIndex(), 5, 1, function()
+		timer.Create("hpwrewrite_godivillio_handler" .. ent:EntIndex(), EFFECT_DURATION, 1, function()
 			if IsValid(ent) then
 				func(ent)
 				sound.Play("hpwrewrite/spells/godivillio.wav", ent:GetPos(), 75)
