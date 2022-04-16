@@ -569,6 +569,8 @@ local function CheckLearned(ply, spell)
 end
 
 function HpwRewrite:CanLearn(ply, name)
+	if hook.Run("HPW_CanLearn", ply, name) == false then return false end
+
 	local spell = HpwRewrite:GetPlayerLearnableSpell(ply, name)
 	if not spell then return false end
 
