@@ -579,6 +579,7 @@ end
 
 -- General function to check if some player can use some spell
 function HpwRewrite:CanUseSpell(ply, name)
+	if hook.Run("HPW_CanUseSpell", ply, name) == false then return false end
 	if self:IsSpellInAdminOnly(name) and not ply:IsAdmin() then return false end
 	if self:IsSpellInBlacklist(name) then return false end
 
